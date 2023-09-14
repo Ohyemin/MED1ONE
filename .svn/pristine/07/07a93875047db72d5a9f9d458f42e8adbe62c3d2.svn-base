@@ -1,0 +1,21 @@
+package kr.or.ddit.Free.service;
+
+import java.util.List;
+
+import kr.or.ddit.Free.vo.CommentVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+public interface CommentService {
+	
+	 public int createFreeComment(CommentVO comment);
+	   
+	   public List<CommentVO> retrieveFreeCommentList(PaginationInfo<CommentVO> paging);
+	   
+	   public long retrieveTotalRecord(PaginationInfo<CommentVO> paging);
+	   
+	   public CommentVO retrieveFreeComment(String commentNo);
+	   public int modifyFreeComment(CommentVO commentVO);
+	   public int removeFreeComment(String commentNo);
+	   public int modifyFreeCommentLike(String commentNo);
+
+}

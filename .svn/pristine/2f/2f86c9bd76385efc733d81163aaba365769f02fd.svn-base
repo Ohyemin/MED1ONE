@@ -1,0 +1,34 @@
+package kr.or.ddit.medical.administ.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.medical.administ.dao.AdministDao;
+import kr.or.ddit.medical.vo.PatientVO;
+
+@Service
+public class AdministServiceImpl implements AdministService{
+
+	@Inject
+	private AdministDao administDAO;
+	
+	/**
+	 * 환자 정보 조회
+	 */
+	@Override
+	public List<PatientVO> retrievePatientList(String patntNm) {
+		return administDAO.selectPatientList(patntNm);
+	}
+
+	/**
+	 * 환자 접수
+	 */
+	@Override
+	public boolean createPatient(PatientVO patient) {
+		return administDAO.insertPatient(patient) > 0;
+	}
+
+}

@@ -1,0 +1,14 @@
+package kr.or.ddit.employee.admin.service;
+
+import java.util.List;
+
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.employee.vo.EmployeeVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+public interface AdminService {
+	public List<AuthorizationReqVO> retrieveAuthList(PaginationInfo paging);
+	
+	public boolean modifyAuthReq(AuthorizationReqVO authReq); //승인신청 상태 변경
+	public boolean modifyEmpAprv(EmployeeVO empAprv); //직원 승인여부 상태 변경
+}

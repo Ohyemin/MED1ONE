@@ -1,0 +1,62 @@
+package kr.or.ddit.employee.vo;
+
+import java.io.Serializable;
+import java.util.List;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import kr.or.ddit.medical.nurse.vo.DoctorDtlVO;
+import kr.or.ddit.medical.nurse.vo.NurseDtlVO;
+import kr.or.ddit.validate.groups.DeleteGroup;
+import kr.or.ddit.validate.groups.InsertGroup;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+
+@Data
+@EqualsAndHashCode(of = "empNo")
+@ToString(exclude = {"empPw","empIdentino"})
+public class EmployeeVO implements Serializable {
+	  
+	@NotBlank(groups = {InsertGroup.class, DeleteGroup.class})
+	private String empNo;
+	@NotBlank
+	private String deptCode;
+	@NotBlank
+	private String empNm;
+	@NotBlank
+	@Size(min = 7, max = 8)
+	@JsonIgnore
+	private transient String empPw;
+	@NotBlank
+	private String empTelno;
+	@NotBlank
+	private transient String empIdentino;
+	@NotBlank
+	private String empEmail;
+	@NotBlank
+	private String empAddr1;
+	@NotBlank
+	private String empAddr2;
+	@NotBlank
+	private String empZipcode;
+	@NotBlank
+	private String jncmpYmd;
+	private String rsgntnYmd;
+	@NotBlank
+	private String hdofYn;
+	
+	private boolean aprvYn;
+	@NotBlank
+	private String empRole;
+	
+	@NotBlank
+	private DepartmentVO dept;
+	
+	private DoctorDtlVO doctrList;
+	private NurseDtlVO nurseList;
+	private TechnicianVO techList;
+}

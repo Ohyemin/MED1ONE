@@ -1,0 +1,23 @@
+package kr.or.ddit.employee.service;
+
+import java.util.List;
+
+import kr.or.ddit.employee.vo.DepartmentVO;
+import kr.or.ddit.employee.vo.EmployeeVO;
+import kr.or.ddit.exception.PKNotFoundException;
+
+public interface EmployeeService {
+
+	public List<DepartmentVO> retrieveDept();
+	
+	public List<EmployeeVO> retrieveDeptTreeList(String deptCode);
+	
+	/**
+	 * 직원 상세 조회
+	 * @param empNo
+	 * @return 존재하는 경우, 직원 정보 반환
+	 * @throws PKNotFoundException 사용자 존재하지 않을 때 예외발생
+	 */
+	public EmployeeVO retrieveEmployee(String empNo) throws PKNotFoundException;
+	
+}

@@ -1,0 +1,12 @@
+package kr.or.ddit.employee.auth.service;
+
+import kr.or.ddit.common.controller.ServiceResult;
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+
+public interface AuthorizationService {
+
+	public ServiceResult createAuth(AuthorizationReqVO auth);
+
+	AuthorizationReqVO retrieveAuth(String reqCode);
+	
+}

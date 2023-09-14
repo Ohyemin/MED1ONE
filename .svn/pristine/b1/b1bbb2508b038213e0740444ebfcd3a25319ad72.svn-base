@@ -1,0 +1,24 @@
+package kr.or.ddit.Free.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.Free.vo.CommentVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+@Mapper
+public interface CommentDao {
+	
+	 public int insertFreeComment(CommentVO comment);
+	   
+	   public List<CommentVO> selectFreeCommentList(PaginationInfo<CommentVO> paging);
+	   
+	   public long selectTotalRecord(PaginationInfo<CommentVO> paging);
+	   
+	   public CommentVO selectFreeComment(String commentNo);
+	   public int updateFreeComment(CommentVO commentVO);
+	   public int deleteFreeComment(String commentNo);
+	   public int updateFreeCommentLike(String commentNo);
+
+}

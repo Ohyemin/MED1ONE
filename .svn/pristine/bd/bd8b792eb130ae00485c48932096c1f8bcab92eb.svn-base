@@ -1,0 +1,34 @@
+package kr.or.ddit.message.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/message/")
+public class MessageController {
+
+	// 문자 - 연락처리스트 조회
+	@GetMapping("telnumberRetrieve.do")
+	public String telnumberRetrieve() {
+		return "message/message";
+	}
+	
+	// 문자 - 문자양식 조회
+	@GetMapping("messageFormRetrieve.do")
+	public String messageFormRetrieve() {
+		return "message/message";
+	}
+	
+	// 문자 - 문자발송
+	@GetMapping("messageSend.do")
+	public String messageSend() {
+		return "message/message";
+	}
+	
+	// 문자 - 문자 내역 리스트 조회
+	@GetMapping("messageList.do")
+	public String messageList() {
+		return "message/message";
+	}
+}

@@ -1,0 +1,35 @@
+package kr.or.ddit.login.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/login/")
+public class LoginController {
+
+	// 로그인 / 로그아웃
+	@GetMapping("login.do")
+	public String login() {
+		return "index";
+	}
+	
+	@GetMapping("logout.do")
+	public String logout() {
+		return "index";
+	}
+	
+	// 비밀번호 분실
+	@GetMapping("pwSearch.do")
+	public String pwSearch() {
+		return "";
+	}
+	
+	// 시스템 사용 신청 
+	@GetMapping("authRequest.do")
+	public String authRequest() {
+		return "auth/authRequest";
+	}
+	
+	
+}

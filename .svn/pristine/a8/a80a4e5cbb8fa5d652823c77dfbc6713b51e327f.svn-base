@@ -1,0 +1,21 @@
+package kr.or.ddit.Free.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/free/")
+public class FreeInsertController {
+
+	@GetMapping("freeInsert.do")
+	public String freeInsert() {
+		return "free/freeForm";
+	}
+	
+	@GetMapping("commentInsert.do")
+	public String commentInsert() {
+		return "";
+	}
+	
+}

@@ -1,0 +1,29 @@
+package kr.or.ddit.employee.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.employee.dao.EmployeeDao;
+import kr.or.ddit.employee.vo.DepartmentVO;
+import kr.or.ddit.employee.vo.EmployeeVO;
+
+@Service
+public class EmployeeServiceImpl implements EmployeeService {
+
+	@Inject
+	private EmployeeDao empDao;
+	
+	@Override
+	public List<EmployeeVO> retrieveDeptTreeList(String deptCode) {
+		return empDao.selectDeptTreeList(deptCode);
+	}
+
+	@Override
+	public List<DepartmentVO> retrieveDept() {
+		return empDao.selectDeptList();
+	}
+
+}

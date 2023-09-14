@@ -1,0 +1,13 @@
+package kr.or.ddit.employee.auth.dao;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+
+@Mapper
+public interface AuthorizationReqDao {
+
+	public int insertAuth(AuthorizationReqVO auth);
+
+	public AuthorizationReqVO selectAuth(String reqCode);
+}

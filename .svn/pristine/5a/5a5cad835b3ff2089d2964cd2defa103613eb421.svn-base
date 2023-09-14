@@ -1,0 +1,14 @@
+package kr.or.ddit.medical.nurse.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+
+public interface MedicineService {
+
+	/**
+	 * 약품 관리 리스트 조회
+	 * @return
+	 */
+	public List<MedicineVO> retrieveMedicineList(String mediName);
+}

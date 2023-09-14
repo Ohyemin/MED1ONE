@@ -1,0 +1,10 @@
+package kr.or.ddit.employee.admin.service;
+
+import java.util.List;
+
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+public interface AdminService {
+	public List<AuthorizationReqVO> retrieveAuthoList(PaginationInfo paging);
+}

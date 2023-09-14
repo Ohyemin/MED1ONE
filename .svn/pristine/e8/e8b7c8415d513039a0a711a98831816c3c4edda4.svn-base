@@ -1,0 +1,26 @@
+package kr.or.ddit.medical.nurse.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.medical.nurse.dao.NurseDao;
+import kr.or.ddit.medical.nurse.vo.DoctorSchdulVO;
+
+@Service
+public class NurseServiceImpl implements NurseService {
+
+	@Inject
+	private NurseDao nurseDAO;
+	
+	/**
+	 * 의사 전체 일정 조회
+	 */
+	@Override
+	public List<DoctorSchdulVO> retrieveDoctorList() {
+		return nurseDAO.selectDoctorList();
+	}
+
+}

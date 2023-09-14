@@ -1,0 +1,14 @@
+package kr.or.ddit.medical.nurse.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.nurse.vo.DoctorSchdulVO;
+
+public interface NurseService {
+
+	/**
+	 * 의사 일정 전체 조회
+	 * @return
+	 */
+	public List<DoctorSchdulVO> retrieveDoctorList();
+}

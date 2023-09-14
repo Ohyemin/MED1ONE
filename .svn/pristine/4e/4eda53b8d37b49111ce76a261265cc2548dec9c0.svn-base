@@ -1,0 +1,88 @@
+<%@page import="java.util.Map"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@taglib uri="http://www.springframework.org/security/tags"
+	prefix="security"%>
+
+<script
+	src="<%=request.getContextPath()%>/resources/js/bootstrap5/js/bootstrap.bundle.min.js"></script>
+
+<style>
+.navbar {
+	height: 50px;
+	background-color: #6aab9c;
+}
+
+.nav-item.dropdown .nav-link.dropdown-toggle {
+    text-decoration: none;
+}
+</style>
+
+<ul class="nav nav-tabs tab-card" role="tablist">
+	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+		href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			커뮤니티 </a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/free/freeList.do">자유게시판</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/common/chat.jsp">채팅</a></li>
+		</ul></li>
+
+	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+		href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			자료실 </a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/tree/treeList.do">조직도</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/common/coviddashboard.jsp">자료실</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/fixtures/fixturesReqInsert.do">비품신청</a></li>
+		</ul></li>
+	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+		href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			진료 </a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/clinic/clinicRetrieve.do">외래진료</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/patient/examinatReception.do">검진센터</a></li>
+		</ul></li>
+
+	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+		href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			병동 </a>
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/clinic/hospitalList.do">병동현황</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/clinic/hospitalSchedule.do">회진일정</a></li>
+		</ul></li>
+
+	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+		href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+			검사</a>
+
+		<ul class="dropdown-menu">
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/Inspection/InspecPatientList.do">검사실</a></li>
+			<li><a class="dropdown-item py-2 rounded"
+				href="${pageContext.request.contextPath }/Inspection/InspectionResult.do">검사결과관리</a></li>
+		</ul>
+	</li>
+</ul>
+
+
+	
+ 	<ul class="nav">      
+       <li id="nav-item" class="nav-item"><a class="nav-link text-white" href="<%=request.getContextPath() %>/nurse/docScheduleList.do">근무일정</a>
+      <li id="nav-item" class="nav-item"><a class="nav-link text-white" href="<%=request.getContextPath()%>/login/logout" role="tab">Logout</a></li>
+      <li id="nav-item" class="nav-item"><a class="nav-link text-white" href="${pageContext.request.contextPath }/mypage/mypage.do" role="tab">MyPage</a></li>
+      </li> 
+     
+	</ul>

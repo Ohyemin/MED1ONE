@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.employee.admin.dao.AdminDao">
+	<sql id="searchFrag">
+		<where>
+        	<if test="simpleCondition neq null and simpleCondition.searchWord neq null and not simpleCondition.searchWord.isEmpty()">
+	        	<choose>
+	        		<when test="simpleCondition.searchType eq 'writer'">
+	        			INSTR(EMP_NM, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<when test="simpleCondition.searchType eq 'title'">
+	        			INSTR(EMP_CODE, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<when test="simpleCondition.searchType eq 'content'">
+	        			INSTR(DEPT_NM, #{simpleCondition.searchWord}) > 0
+	        		</when>
+	        		<otherwise>
+		        		INSTR(EMP_NM, #{simpleCondition.searchWord}) > 0
+		        		OR
+		        		INSTR(EMP_CODE, #{simpleCondition.searchWord}) > 0
+		        		OR
+		        		INSTR(DEPT_NM, #{simpleCondition.searchWord}) > 0
+	        		</otherwise>
+	        	</choose>
+        	</if>
+        </where>
+	</sql>
+	<select id="selectTotalRecord" resultType="long" parameterType="PaginationInfo">
+		SELECT COUNT(*)
+		FROM AUTHORIZATION_REQ
+		<include refid="searchFrag" />
+	</select>
+	
+	<resultMap type="AuthorizationReqVO" id="authoMap" autoMapping="true">
+		<id property="reqCode" column="REQ_CODE"/>
+			<association property="emp" javaType="EmployeeVO" autoMapping="true">
+				<association property="dept" javaType="DepartmentVO">
+				<result property="deptCode" column="DEPT_CODE"/>
+				</association>
+			</association>
+	</resultMap>
+	<select id="authoReqList" parameterType="string" resultMap="authoMap">
+	WITH EMPVIEWS AS (
+	    SELECT EMP.EMP_NO, EMP.EMP_NM, EMP.EMP_IDENTINO, EMP.DEPT_CODE, EMP.APRV_YN, DEPT.DEPT_NM
+	    FROM EMPLOYEE EMP
+	    INNER JOIN DEPARTMENT DEPT ON (EMP.DEPT_CODE = DEPT.DEPT_CODE)
+	)
+		SELECT EMPVIEWS.*, A.REQ_CODE, A.REQ_STATUS, A.AUTHOREQ_DATE, A.ATCH_SN
+		FROM AUTHORIZATION_REQ A
+		INNER JOIN EMPVIEWS ON (EMPVIEWS.EMP_NO = A.EMP_NO)
+		WHERE A.REQ_STATUS = 'N' AND EMPVIEWS.APRV_YN IS NULL AND EMPVIEWS.EMP_NO = 'TCP0056'
+	</select>
+</mapper>

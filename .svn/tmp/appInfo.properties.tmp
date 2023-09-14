@@ -1,0 +1,13 @@
+imagePath=/resources/images
+
+<<<<<<< .mine
+atchPath=file:D:/0.tools/eGovFrameDev-4.1.0-64bit/workspace1/MediOne/src/main/webapp/resources/images/atch
+||||||| .r352010
+=======
+atchPath=file:${basedir}\\resources\\images\\atch
+
+atchUrl=/resources/images/atch
+>>>>>>> .r352135
+
+#imagePath=file:M:\\resources\\images
+#atchPath=file:M:\\resources\\images\\atch

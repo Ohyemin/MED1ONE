@@ -1,0 +1,5 @@
+package kr.or.ddit.medical.nurse.service;
+
+public class NurseServiceImpl implements NurseService {
+
+}

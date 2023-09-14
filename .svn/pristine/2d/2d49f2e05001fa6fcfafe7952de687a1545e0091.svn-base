@@ -1,0 +1,21 @@
+package kr.or.ddit.medical.administ.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.vo.PatientVO;
+
+public interface AdministService {
+
+	/**
+	 * 환자 정보 조회
+	 * @return
+	 */
+	public List<PatientVO> retrievePatientList(String patntNm);
+	
+	/**
+	 * 환자 접수
+	 * @param patient
+	 * @return
+	 */
+	public boolean createPatient(PatientVO patient);
+}

@@ -1,0 +1,63 @@
+package kr.or.ddit.medical.clinc.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.File.vo.CtfDocVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+import kr.or.ddit.medical.vo.PatientVO;
+
+@Mapper
+public interface ClinicDao {
+
+	public long selectTotalRecord(PaginationInfo<MedicineVO> paging);
+	public List<MedicineVO> selectPagingList(PaginationInfo<MedicineVO> paging);
+	
+	/**
+	 *  약품리스트 검색
+	 * @param mediName
+	 * @return List<MedicineVO> 
+	 */
+	public List<MedicineVO> selectMedicineList(String mediName);
+	
+	/**
+	 *  상병리스트 검색
+	 * @param disName
+	 * @return List<DiseaseVO>
+	 */
+	public List<DiseaseVO> selectDiseaseList(String disName);
+	
+	
+	/**
+	 * 검색할 때 마다 검색수 +1
+	 * @param mediName
+	 */
+	public int SearchCnt(String mediName);
+	
+	/**
+	 * 즐겨 찾는 약품 리스트
+	 * @return
+	 */
+	public List<MedicineVO> popluarMedicineList();
+	
+	
+	/**ㅁ
+	 * 접수 코드에 따른 환자 정보
+	 * @param recCode
+	 * @return
+	 */
+	public PatientVO selectInfoPatien(String recCode);
+	
+	
+	/**
+	 * 제증명 등록
+	 * @param CTF
+	 * @return
+	 */
+	public int insertCtfdoc(CtfDocVO CTF); 
+	
+	
+}

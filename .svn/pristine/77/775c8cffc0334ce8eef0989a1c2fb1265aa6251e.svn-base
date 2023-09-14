@@ -1,0 +1,75 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<!-- 수정필요 -->
+
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<!-- Favicon-->
+<!-- plugin css file  -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/dist/assets/plugin/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/dist/assets/plugin/datatables/dataTables.bootstrap5.min.css">
+<!-- project css file  -->
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/resources/dist/assets/css/ihealth.style.min.css">
+
+<h4>마이페이지</h4>
+
+<table class="card">
+	<tr>
+		<td><img src="..." class="img-thumbnail" alt="..."></td>
+	</tr>
+	<tr>
+		<th>사번</th>
+		<td>${employee.empNo }</td>
+	</tr>
+	<tr>
+		<th>부서코드</th>
+		<td>${employee.deptCode }</td>
+	</tr>
+	<tr>
+		<th>부서명</th>
+		<td>${dept.deptNm }</td>
+	</tr>
+	<tr>
+		<th>성명</th>
+		<td>${employee.empNm }</td>
+	</tr>
+	<tr>
+		<th>비밀번호</th>
+		<td>${employee.empPw }</td>
+		<td>
+			<button type="button" class="btn btn-user btn-set-task w-sm-100" data-bs-toggle="modal" data-bs-target="#depadd">변경</button>
+		</td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td>${employee.empTelno }</td>
+	</tr>
+	<tr>
+		<th>주민번호</th>
+		<td>${employee.empIdentino }</td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td>${employee.empEmail }</td>
+	</tr>
+	<tr>
+		<th>우편번호</th>
+		<td>${employee.empZipcode }</td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td>${employee.empAddr1 }</td>
+	</tr>
+	<tr>
+		<th>상세주소</th>
+		<td>${employee.empAddr2 }</td>
+	</tr>
+	<tr>
+		<th>입사일</th>
+		<td>${employee.jncmpYmd }</td>
+	</tr>
+</table>

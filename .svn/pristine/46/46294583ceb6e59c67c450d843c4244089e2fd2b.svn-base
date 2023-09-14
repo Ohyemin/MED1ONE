@@ -1,0 +1,23 @@
+package kr.or.ddit.medical.examinate.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.medical.examinate.dao.MdexmnDao;
+import kr.or.ddit.medical.examinate.vo.MdexmnDtl;
+
+@Service
+public class MdexmnServiceImpl implements MdexmnService {
+
+	@Inject
+	private MdexmnDao mdexmnDao;
+	
+	@Override
+	public List<MdexmnDtl> retrieveMdexnm(String mdexmnDtlCode) {
+		return mdexmnDao.selectMdexmnList(mdexmnDtlCode);
+	}
+
+}

@@ -1,0 +1,28 @@
+package kr.or.ddit.Free.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.Free.dao.FreeDao;
+import kr.or.ddit.Free.vo.FreeBoardVO;
+
+@Service
+public class FreeServeciImpl implements FreeService {
+	@Inject
+	private FreeDao freeDAO; 
+	
+	@Override
+	public List<FreeBoardVO> retrieveBoardList() {
+		return freeDAO.selectFreeboardList();
+	}
+
+	@Override
+	public FreeBoardVO retirevefreeBoard(int boNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

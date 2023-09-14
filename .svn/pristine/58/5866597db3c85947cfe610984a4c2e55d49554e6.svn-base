@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.employee.dao.EmployeeDao">
+
+	<select id="selectDeptList" resultType="kr.or.ddit.employee.vo.DepartmentVO">
+		SELECT DEPT_NM
+		FROM DEPARTMENT
+	</select>
+
+
+	<select id="selectDeptTreeList" resultType="kr.or.ddit.employee.vo.EmployeeVO" parameterType="string">
+	  SELECT
+	  		EMP_NO,
+           DEPT_NM "dept.deptNm",
+           CASE
+               WHEN SUBSTR(EMP_NO, 1, 1) = 'N' AND NOT SUBSTR(EMP_NO, 2, 1) = 'N' THEN EMP_NM || ' (간호사)'
+               ELSE EMP_NM
+           END AS EMP_NM,
+           EMP_TELNO
+	  FROM DEPARTMENT INNER JOIN EMPLOYEE ON (DEPARTMENT.DEPT_CODE = EMPLOYEE.DEPT_CODE)
+	  <where>
+	    <choose>
+	      <when test='empNo.substring(1,1) eq "N".toString()'>
+	        AND (SUBSTR(EMP_NO, 1 ,1) = 'N') AND (SUBSTR(EMP_NO, 2, 2) = #{deptCode})
+	      </when>
+	      <when test='empNo.startsWith("D")'>
+	        AND (SUBSTR(EMP_NO, 1 ,1) = 'D') AND (SUBSTR(EMP_NO, 2, 2) = #{deptCode})
+	      </when>
+	      <otherwise>
+	        AND SUBSTR(EMP_NO, 2 ,2) = #{deptCode}
+	      </otherwise>
+	    </choose>
+	  </where>
+	</select>
+
+</mapper>

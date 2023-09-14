@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.employee.dao.EmployeeDao">
+
+	<select id="selectDeptList" resultType="kr.or.ddit.employee.vo.DepartmentVO">
+		SELECT DEPT_NM
+		FROM DEPARTMENT
+	</select>
+
+
+	<select id="selectDeptTreeList" resultType="kr.or.ddit.employee.vo.EmployeeVO" parameterType="string">
+	  SELECT B.EMP_NO, A.DEPT_NM dept.deptNm, B.EMP_NM, B.EMP_TELNO
+	  FROM DEPARTMENT A INNER JOIN EMPLOYEE B ON (A.DEPT_CODE = B.DEPT_CODE)
+	  <where>
+	    <choose>
+	      <when test="substr(B.EMP_NO, 1 ,1) = 'N'">
+	        AND (SUBSTR(B.EMP_NO, 1 ,1) = 'N') AND (SUBSTR(B.EMP_NO, 2, 2) = #{deptCode})
+	      </when>
+	      <when test="substr(B.EMP_NO, 1 ,1) = 'D'">
+	        AND (SUBSTR(B.EMP_NO, 1 ,1) = 'D') AND (SUBSTR(B.EMP_NO, 2, 2) = #{deptCode})
+	      </when>
+	      <otherwise>
+	        AND SUBSTR(B.EMP_NO, 2 ,2) = #{deptCode}
+	      </otherwise>
+	    </choose>
+	  </where>
+	</select>
+
+</mapper>

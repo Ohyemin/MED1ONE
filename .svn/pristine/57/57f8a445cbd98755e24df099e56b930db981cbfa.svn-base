@@ -1,0 +1,28 @@
+package kr.or.ddit.notice.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/notice/")
+public class NoticeUpdateController {
+
+	// 공지사항 게시물 등록
+	@GetMapping("noticeInsert.do")
+	public String noticeInsert() {
+		return "notice/noticeForm";
+	}
+	
+	// 공지사항 수정
+	@GetMapping("noticeUpdate.do")
+	public String noticeUpdate() {
+		return "notice/noticeForm";
+	}
+	
+	// 공지사항 삭제
+	@GetMapping("noticeDelete.do")
+	public String noticeDelete() {
+		return "notice/noticeDetail";
+	}
+}

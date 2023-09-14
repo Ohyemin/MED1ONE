@@ -1,0 +1,31 @@
+package kr.or.ddit.medical.clinc.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+
+@Mapper
+public interface ClinicDao {
+
+	public long selectTotalRecord(PaginationInfo<MedicineVO> paging);
+	public List<MedicineVO> selectPagingList(PaginationInfo<MedicineVO> paging);
+	
+	/**
+	 *  약품리스트 검색
+	 * @param mediName
+	 * @return List<MedicineVO> 
+	 */
+	public List<MedicineVO> selectMedicineList(String mediName);
+	
+	/**
+	 *  상병리스트 검색
+	 * @param disName
+	 * @return List<DiseaseVO>
+	 */
+	public List<DiseaseVO> selectDiseaseList(String disName);
+
+}

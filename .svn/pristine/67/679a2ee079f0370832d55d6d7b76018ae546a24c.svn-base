@@ -1,0 +1,109 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+
+<h4>${employee.empNm }님</h4>
+<div>
+<form:form method="post" modelAttribute="employee" enctype="multipart/form-data">
+	<form:hidden path="deptCode"/>
+	<form:hidden path="hdofYn"/>
+	<form:hidden path="aprvYn"/>
+	<form:hidden path="empRole"/>
+	<table id="mypageFrom" class="table table-bordered">
+		<tr>
+			<th rowspan="7">
+			사진
+<!-- 			<img src="..." class="img-thumbnail" alt="..."> -->
+<!-- 			<td> -->
+<!-- 			<input type="file" name="Image" accept="image/*"/> -->
+<%-- 			<form:errors path="Img" class="error"/> --%>
+<!-- 			</td> -->
+			</th>
+		</tr>
+		<tr class="notIn">
+			<th>사번</th>
+			<td>
+			<form:input path="empNo" readonly="true"/>
+			</td>
+		</tr>
+		<tr>
+			<th>비밀번호</th>
+			<td id="in">
+			<form:password path="empPw" class="form-control"/>
+			<form:errors path="empPw" class="error" />
+			</td>
+		</tr>
+		<tr class="notIn">
+			<th>성명</th>
+			<td>
+			<form:input path="empNm" readonly="true" />
+			</td>
+		</tr>
+		<tr class="notIn">
+			<th>주민번호</th>
+			<td>
+			<form:input path="empIdentino" readonly="true"/>
+			</td>
+		</tr>
+		<tr class="notIn">
+			<th>담당과</th>
+			<td>
+			<form:input path="dept.deptNm" readonly="true" />
+			</td>
+		</tr>
+		<tr class="notIn">
+			<th>입사일자</th>
+			<td colspan="2">
+			<form:input path="jncmpYmd" readonly="true" />
+			</td>
+		</tr>
+		<tr>
+			<th>핸드폰번호</th>
+			<td colspan="2">
+			<form:input path="empTelno" class="form-control" type="text"/>
+            <form:errors path="empTelno" class="error" />
+			</td>
+		</tr>
+		<tr>
+			<th>이메일</th>
+			<td colspan="2">
+			<form:input path="empEmail" class="form-control" type="text"/>
+            <form:errors path="empEmail" class="error" />
+			</td>
+		</tr>
+		<tr>
+			<th>우편번호</th>
+			<td colspan="2">
+			<form:input path="empZipcode" class="form-control" type="text"/>
+            <form:errors path="empZipcode" class="error" />
+			</td>
+		</tr>
+		<tr>
+			<th>주소</th>
+			<td colspan="2">
+			<form:input path="empAddr1" class="form-control" type="text"/>
+            <form:errors path="empAddr1" class="error" />
+			</td>
+		</tr>
+		<tr>
+			<th>상세주소</th>
+			<td colspan="2">
+			<form:input path="empAddr2" class="form-control" type="text"/>
+            <form:errors path="empAddr2" class="error" />
+			</td>
+		</tr>
+		<tr class="notIn">
+			<th>면허번호</th>
+			<td colspan="2">
+			<form:input path="doctrList.doctrNum" readonly="true" />
+			</td>
+		</tr>
+		<tr>
+			<td colspan="4" style="text-align: right;">
+				<input type="submit" class="btn btn-primary" value="정보수정"/>
+			</td>
+		</tr>
+	</table>
+</form:form>
+</div>

@@ -1,0 +1,5 @@
+package kr.or.ddit.medical.patient.dao;
+
+public interface PatientDao {
+
+}

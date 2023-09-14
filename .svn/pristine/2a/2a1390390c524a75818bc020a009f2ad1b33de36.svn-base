@@ -1,0 +1,44 @@
+package kr.or.ddit.medical.hospital.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.medical.hospital.dao.HospitalDao;
+import kr.or.ddit.medical.hospital.vo.HospitalizationVO;
+import kr.or.ddit.medical.hospital.vo.SckbdVO;
+import kr.or.ddit.medical.vo.PatientVO;
+
+@Service
+public class HospitalServiceImpl implements HospitalService {
+
+	@Inject
+	private HospitalDao hospitalDAO;
+	
+	/**
+	 * 병동 환자 조회
+	 */
+	@Override
+	public List<HospitalizationVO> retrieveHospitalPatientList() {
+		return hospitalDAO.hospitalPatientList();
+	}
+
+	/**
+	 *병동 병실 list
+	 */
+	@Override
+	public List<SckbdVO> retrieveSckbdList(String sckbdRo) {
+		return hospitalDAO.sckbdList(sckbdRo);
+	}
+
+	/**
+	 * 입원 대기환자 list
+	 */
+	@Override
+	public List<PatientVO> retrieveHospitalWaitList(String word) {
+		return hospitalDAO.waitPatnt(word);
+	}
+
+}

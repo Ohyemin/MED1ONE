@@ -1,0 +1,66 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<h4>마이페이지</h4>
+<table>
+	<tr>
+		<th>사번</th>
+		<td>${employee.empNo }</td>
+	</tr>
+	<tr>
+		<th>부서코드</th>
+		<td>${employee.deptCode }</td>
+	</tr>
+	<tr>
+		<th>성명</th>
+		<td>${employee.empNm }</td>
+	</tr>
+	<tr>
+		<th>비밀번호</th>
+		<td>${employee.empPw }</td>
+	</tr>
+	<tr>
+		<th>전화번호</th>
+		<td>${employee.empTelno }</td>
+	</tr>
+	<tr>
+		<th>주민번호</th>
+		<td>${employee.empIdentino }</td>
+	</tr>
+	<tr>
+		<th>이메일</th>
+		<td>${employee.empEmail }</td>
+	</tr>
+	<tr>
+		<th>주소</th>
+		<td>${employee.empAddr1 }</td>
+	</tr>
+	<tr>
+		<th>상세주소</th>
+		<td>${employee.empAddr2 }</td>
+	</tr>
+	<tr>
+		<th>우편번호</th>
+		<td>${employee.empZipcode }</td>
+	</tr>
+	<tr>
+		<th>입사일</th>
+		<td>${employee.jncmpYmd }</td>
+	</tr>
+	<tr>
+		<th>퇴사일</th>
+		<td>${employee.rsgntnYmd }</td>
+	</tr>
+	<tr>
+		<th>재직여부</th>
+		<td>${employee.hdofYn }</td>
+	</tr>
+	<tr>
+		<th>승인여부</th>
+		<td>${employee.aprvYn }</td>
+	</tr>
+	<tr>
+		<th>권한</th>
+		<td>${employee.empRole }</td>
+	</tr>
+</table>

@@ -1,0 +1,42 @@
+package kr.or.ddit.Free.vo;
+
+import java.time.LocalDateTime;
+import java.util.List;
+
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import kr.or.ddit.employee.vo.EmployeeVO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 자유게시판 VO
+ * @author PC-10
+ *
+ */
+@EqualsAndHashCode(of = "boardNo")
+@Data
+public class FreeBoardVO {
+	@NotBlank
+	private String boardNo; //게시글번호 (시퀀스 FREE_NO_SEQ)
+	@NotBlank
+	private String boardWrtr; //작성자
+	@NotBlank
+	private String boardTitle; //제목
+	@NotBlank
+	private String boardContent; //내용
+	
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private LocalDateTime boardRegidate; //등록일시 sysdate
+	@NotBlank
+	private int boardReadcount; //조회수(기본값 0)
+	private String boardAtchnum; //첨부파일 번호 ATCH_FILE
+	@NotBlank 
+	private String empNo; //사번
+
+	private EmployeeVO employee;
+	private List<CommentVO> commentList; //댓글리스트
+}

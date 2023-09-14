@@ -1,0 +1,96 @@
+package kr.or.ddit.medical.administ.controller;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.or.ddit.medical.administ.service.AdministService;
+import kr.or.ddit.medical.vo.PatientVO;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequestMapping("/administ")
+@RequiredArgsConstructor
+public class AdministReceiptController {
+	
+	@Inject
+	private final AdministService service;
+	
+	@ModelAttribute("patient")
+	public PatientVO patient() {
+		return new PatientVO();
+	}
+	
+	// jsp 접근 메서드
+	@GetMapping("patientReceiptView.do")
+	public String patientRetrieve(Model model) {
+		return "administ/patientReceipt";
+	}
+	
+	/**
+	 * 환자 접수
+	 * @param model
+	 * @param errors
+	 * @param patient
+	 * @return
+	 */
+	@PostMapping(value = "patientReceiptView.do", produces = MediaType.APPLICATION_JSON_VALUE)
+	public String getPostPatient(
+			 @ModelAttribute("patient") PatientVO patient
+			 , BindingResult errors
+			 , Model model) {
+			
+		String logicalViewName = null;
+		boolean result = false;
+		
+		if(!errors.hasErrors()) {
+			result = service.createPatient(patient);
+			
+			if(result == true) {
+				logicalViewName = "administ/patientReceipt";
+			}else {
+				model.addAttribute("message", "환자 접수 중 오류 발생.");
+				logicalViewName = "administ/patientReceipt";
+			}
+		}else {
+			logicalViewName = "administ/patientReceipt";
+		}
+		return logicalViewName;
+	}
+	
+	
+	/**
+	 * 환자 검색 창 접근 jsp
+	 * @return
+	 */
+	@GetMapping(value = "/patientReceipt.do")
+	
+	public String receiptView(Model model) {
+		return "administ/patientCheck";
+	}
+	
+	/**
+	 * 환자 검색
+	 * @param model
+	 * @param patntNm
+	 * @return
+	 */
+	@GetMapping(value = "/patientReceipt.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public List<PatientVO> checkView(Model model, @RequestParam("what") String patntNm ) {
+		List<PatientVO> patientList = service.retrievePatientList(patntNm);
+		model.addAttribute("patientList", patientList);
+		return patientList;
+	}
+}

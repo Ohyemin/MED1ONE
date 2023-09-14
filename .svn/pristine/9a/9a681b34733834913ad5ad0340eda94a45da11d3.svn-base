@@ -1,0 +1,22 @@
+package kr.or.ddit.employee.auth.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@RequestMapping("//")
+@Controller
+public class AuthorizationReqController {
+	
+	
+	@GetMapping
+	public String getAuthSignUp() {
+		return "login/auth-signup";
+	}
+	
+	@PostMapping
+	public String postAuthSigup() {
+		return "login/auth-signup";
+	}
+}

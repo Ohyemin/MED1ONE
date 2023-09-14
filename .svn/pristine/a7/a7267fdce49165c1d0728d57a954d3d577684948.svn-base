@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.medical.patient.dao.PatientDao">
+
+
+	<select id="selectPatntStat" resultType="PatntStatVO">
+		select P.patnt_nm, P.patnt_code, R.rec_code, S.stat_code, S.stat_time, S.rec_code, S.fclty_code
+		from PATIENT P 
+		inner join RECEPTION R on(P.patnt_code = R.patnt_code)
+		inner join PATNT_STAT S on(S.rec_code = R.rec_code)
+	</select>
+
+
+</mapper>

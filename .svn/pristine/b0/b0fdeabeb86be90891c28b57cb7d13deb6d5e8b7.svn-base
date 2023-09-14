@@ -1,0 +1,14 @@
+package kr.or.ddit.medical.hospital.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.hospital.vo.HospitalizationVO;
+
+public interface HospitalService {
+
+	/**
+	 * 병동 환자 조회
+	 * @return
+	 */
+	public List<HospitalizationVO> retrieveHospitalPatientList();
+}

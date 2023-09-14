@@ -1,0 +1,11 @@
+package kr.or.ddit.medical.patient.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.vo.PatntStatVO;
+
+public interface PatientService {
+
+	public List<PatntStatVO> retrievePatntStat();
+	
+}

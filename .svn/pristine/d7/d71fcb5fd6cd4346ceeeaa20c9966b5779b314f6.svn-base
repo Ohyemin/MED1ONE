@@ -1,0 +1,16 @@
+package kr.or.ddit.medical.clinc.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/clinic")
+public class DoctorClinicRetrieveController {
+	
+	@GetMapping("clinicRetrieve.do")
+	public String clinicRetrieve() {
+		return "clinic/clinic";
+	}
+}
+

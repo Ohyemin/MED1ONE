@@ -1,0 +1,69 @@
+package kr.or.ddit.employee.admin.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import kr.or.ddit.employee.admin.service.AdminService;
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.employee.vo.SimpleCondition;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/admin/")
+public class AdminManageController {
+	
+	private final AdminService service;
+
+	@RequestMapping("authRequestList.do")
+	public String authRequestList(
+		@RequestParam(name="page", required = false, defaultValue = "1") long currentPage
+		, @ModelAttribute("simpleCondition") SimpleCondition simpleCondition
+		, Model model
+	) {
+		PaginationInfo<AuthorizationReqVO> paging = new PaginationInfo<>();
+		paging.setCurrentPage(currentPage);
+		paging.setSimpleCondition(simpleCondition);
+		
+		List<AuthorizationReqVO> authList = service.retrieveAuthoList(paging);
+		paging.setDataList(authList);
+		
+		model.addAttribute("paging", paging);
+		return "auth/authReqList";
+	}
+	
+	@GetMapping("authRequestCheck.do")
+	public String authRequestCheck() {
+		return "auth/authReqList";
+	}
+	
+	
+	@GetMapping("nurScheduleView.do")
+	public String nurScheduleView() {
+		return "medi/schedule";
+	}
+	
+	@GetMapping("docScheduleView.do")
+	public String docScheduleView() {
+		return "medi/schedule";
+	}
+	
+	@GetMapping("nurScheduleInsert.do")
+	public String nurScheduleInsert() {
+		return "medi/schedule";
+	}
+	
+	@GetMapping("docScheduleInsert.do")
+	public String docScheduleInsert() {
+		return "medi/schedule";
+	}
+	
+	
+}

@@ -1,0 +1,186 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<h4>병동 조회</h4>
+<select id="ward">
+	<option value="4room">4인실</option>
+	<option value="6room">6인실</option>
+	<option value="8room">8인실</option>
+</select>
+ <!-- 병동관리 -->
+<div class="col-md-12 col-lg-6" style="width : 100%; margin-right: 30px;">
+       <div class="card mb-3">
+          <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+              <h6 class="mb-0 fw-bold ">병동관리</h6>
+          </div>
+          
+      <div class="card-body" id="wardList">
+              <div class="room_book">
+                  <div id="wardRoom" class="row row-cols-2 row-cols-sm-4 row-cols-md-6 row-cols-lg-6 g-3">
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="1A" checked/> -->
+<!--                       <label for="1A"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room A-101</span></label> -->
+<!--                       </div> -->
+                  
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="1B" /> -->
+<!--                       <label for="1B"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room B-102</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="1C" /> -->
+<!--                       <label for="1C"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room C-103</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" disabled id="1D" /> -->
+<!--                       <label for="1D"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Occupied</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="1E" /> -->
+<!--                       <label for="1E"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room D-104</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="1F" checked/> -->
+<!--                       <label for="1F"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room E-105</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2A" /> -->
+<!--                       <label for="2A"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room F-106</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2B" /> -->
+<!--                       <label for="2B"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room G-107</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2C" checked/> -->
+<!--                       <label for="2C"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room H-108</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2D" /> -->
+<!--                       <label for="2D"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room I-109</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2E" checked/> -->
+<!--                       <label for="2E"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room J-110</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="2F" /> -->
+<!--                       <label for="2F"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room K-111</span></label> -->
+<!--                       </div> -->
+                      
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3A" checked/> -->
+<!--                       <label for="3A"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room L-112</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3B" /> -->
+<!--                       <label for="3B"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room M-113</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3C" /> -->
+<!--                       <label for="3C"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room N-114</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3D" /> -->
+<!--                       <label for="3D"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room O-115</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3E" checked/> -->
+<!--                       <label for="3E"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room P-116</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3F" /> -->
+<!--                       <label for="3F"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room Q-117</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3A" checked/> -->
+<!--                       <label for="3A"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room L-112</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3B" /> -->
+<!--                       <label for="3B"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room M-113</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3C" /> -->
+<!--                       <label for="3C"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room N-114</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3D" /> -->
+<!--                       <label for="3D"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room O-115</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3E" checked/> -->
+<!--                       <label for="3E"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room P-116</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3F" /> -->
+<!--                       <label for="3F"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room Q-117</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3A" checked/> -->
+<!--                       <label for="3A"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room L-112</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3B" /> -->
+<!--                       <label for="3B"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room M-113</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3C" /> -->
+<!--                       <label for="3C"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room N-114</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3D" /> -->
+<!--                       <label for="3D"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room O-115</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3E" checked/> -->
+<!--                       <label for="3E"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room P-116</span></label> -->
+<!--                       </div> -->
+<!--                       <div class="room col"> -->
+<!--                       <input type="checkbox" id="3F" /> -->
+<!--                       <label for="3F"><i class="icofont-patient-bed fs-2"></i><span class="text-muted">Room Q-117</span></label> -->
+<!--                       </div> -->
+         </div>
+        </div>
+      </div>
+  	</div>
+</div>
+<!--병동관리 끝-->
+
+<script>
+//병동 선택(4인실, 6인실, 8인실)
+$(ward).on("change", function(event){
+	
+	var wardSelect = $(this).val();
+	
+	loadWardList(wardSelect);
+});
+
+//선택한 병동 list
+function loadWardList(wardSelect){
+	var wardSelect = wardSelect.charAt(0);
+	$.getJSON("<c:url value='/hospital/hospitalSearch.do'/>",{wardSelect:wardSelect}).done(function(resp){
+		console.log("wardSelect:",wardSelect);
+		let div=$("#wardRoom")
+		div.empty();
+		$(resp).each(function(index,dtl){
+			let div1 = $("<div>").append(
+					$("<div>").addClass("room col")
+					,$("<input>").attr("type","checkbox").attr("id",dtl.sckbdNo)
+					,$("<label>").attr("for",dtl.sckbdNo).append(
+						$("<i>").addClass("icofont-patient-bed fs-2")
+						,$("<span>").addClass("text-muted").text("room")
+					)
+			);
+			div.append(div1);
+		});
+	});
+}
+
+
+$(document).ready(function(){
+	
+	$(ward).trigger('change');
+
+})
+
+</script>

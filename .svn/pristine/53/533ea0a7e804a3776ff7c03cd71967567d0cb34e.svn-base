@@ -1,0 +1,194 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+
+<div id="ihealth-layout" class="theme-tradewind">
+	<!-- main body area -->
+	<div class="main px-lg-4 px-md-4">
+		<!-- Body: Body -->
+		<div class="body d-flex py-3">
+
+			<div class="container-xxl">
+				<!-- 1행 3열 카드 시작 -->
+				<div class="row g-3 mb-3">
+					<div class="col-md-4 col-lg-4"
+						style="width: 49%; margin-right: 1%;">
+						<div class="card">
+							<div
+								class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+								<h6 class="mb-0 fw-bold">진료 대기실</h6>
+							</div>
+							<div class="card-body">
+								<div id="#">
+									<table class="table table-border">
+										<thead>
+											<tr>
+												<td>환자 이름</td>
+												<td>상태변경</td>
+												<td>상태코드</td>
+												<td>현재위치시각</td>
+												<td>접수코드</td>
+												<td>시설코드(진료실 대기)</td>
+												<td></td>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${not empty statList}">
+												<c:forEach items="${statList}" var="list">
+													<c:if test="${list.statCode == '005'}">
+														<tr>
+
+															<td>${list.recep.patnt.patntNm }</td>
+															<td><select id="statusSelect">
+																	<option value="">상태선택</option>
+																	<option value="006">진료중</option>
+															</select></td>
+															<td>${list.statCode }</td>
+															<td>${list.statTime }</td>
+															<td>${list.recCode }</td>
+															<td>${list.fcltyCode }</td>
+															<td>
+																<button type="button" data-recCode="${list.recCode }" data-fcltyCode="${list.fcltyCode }" onclick="saveData(this)">저장</button>
+															</td>
+
+														</tr>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</tbody>
+									</table>
+
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="col-md-4 col-lg-4"
+						style="width: 49%; margin-right: 1%;">
+						<div class="card">
+							<div
+								class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+								<h6 class="mb-0 fw-bold">진료실</h6>
+							</div>
+							<div class="card-body">
+								<div id="patientTable">
+									<table class="table table-border">
+										<thead>
+											<tr>
+												<td>환자 이름</td>
+												<td>상태변경</td>
+												<td>상태코드</td>
+												<td>현재위치시각</td>
+												<td>접수코드</td>
+												<td>시설코드(진료실 대기)</td>
+												<td></td>
+											</tr>
+										</thead>
+										<tbody>
+											<c:if test="${not empty statList}">
+												<c:forEach items="${statList}" var="list">
+													<c:if test="${list.statCode == '006'}">
+														<tr>
+
+															<td>${list.recep.patnt.patntNm }</td>
+															<td><select>
+																	<option value="">상태선택</option>
+																	<option value="006">진료중</option>
+															</select></td>
+															<td>${list.statCode }</td>
+															<td>${list.statTime }</td>
+															<td>${list.recCode }</td>
+															<td>${list.fcltyCode }</td>
+															<td>
+																<button type="button" id="save">저장</button>
+															</td>
+
+														</tr>
+													</c:if>
+												</c:forEach>
+											</c:if>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+<script>
+
+$(document).ready(function() {
+    // a 태그 클릭 시 이벤트 처리
+    $('button').on('click', function(event) {
+        event.preventDefault(); // a 태그의 기본 동작을 막음
+        var formData = {
+                recCode : $(this).data('recCode');
+                statCode : document.getElementById('statusSelect').value;
+                fcltyCode : $(this).data('fcltyCode');
+             };
+
+
+        $.ajax({
+            url: '/patient/patientInsert.do',
+            type: 'GET',
+            data: { insertDate: formData },
+            dataType: 'json',
+            success: function(data) {
+            	console.log(data);
+            	$('#patientTable').empty();
+                
+                var tableHtml = '<table class="table table-border">';
+                tableHtml += '<thead><tr>';
+                tableHtml += '<td>환자 이름</td>';
+                tableHtml += '<td>상태변경</td>';
+                tableHtml += '<td>상태코드</td>';
+                tableHtml += '<td>현재위치시각</td>';
+                tableHtml += '<td>접수코드</td>';
+                tableHtml += '<td>시설코드(진료실 대기)</td>';
+                tableHtml += '<td></td>';
+                tableHtml += '</tr></thead>';
+                tableHtml += '<tbody>';
+
+                for (var i = 0; i < data.length; i++) {
+                   tableHtml += '<tr>';
+                   tableHtml += '<td>' + data[i].recep.patnt.patntNm + '</td>';
+                   tableHtml += '<td><select>';
+                   tableHtml += '<option value="" >상태선택</option>';
+                   tableHtml += '<option value="006">진료중</option>';
+                   tableHtml += '</select></td>';
+                   tableHtml += '<td>' + data[i].statCode + '</td>';
+                   tableHtml += '<td>' + data[i].statTime + '</td>';
+                   tableHtml += '<td>' + data[i].recCode + '</td>';
+                   tableHtml += '<td>' + data[i].fcltyCode + '</td>';
+                   tableHtml += '<td>';
+                   tableHtml += '<button type="button" class="btn btn-secondary btn-save" data-rec-code="' + data[i].recCode + '" data-fclty-code="' + data[i].fcltyCode + '">저장</button>';
+                   tableHtml += '</td>';
+                   tableHtml += '</tr>';
+                }
+
+                tableHtml += '</tbody>';
+                tableHtml += '</table>';
+
+                // 환자 테이블 영역의 ID를 지정해서 해당 부분 업데이트
+                $('#patientTable').html(tableHtml);
+
+            },
+            error: function(xhr, status, error) {
+//                 alert('리스트를 가져오는데 실패했습니다.');
+            }
+        });
+    });
+});
+
+
+
+
+</script>

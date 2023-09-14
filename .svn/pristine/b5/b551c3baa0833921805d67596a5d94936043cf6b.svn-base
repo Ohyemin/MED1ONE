@@ -1,0 +1,26 @@
+package kr.or.ddit.medical.clinc.service;
+
+import java.util.List;
+
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+
+public interface ClinicService {
+	
+	public List<MedicineVO> retrievePagingList(PaginationInfo<MedicineVO> paging);
+	
+	/**
+	 *  약품 리스트 검색
+	 * @param mediName
+	 * @return List<MedicineVO>
+	 */
+	public List<MedicineVO> retrieveMedicineList(String mediName);
+	
+	/**
+	 *  상병 리스트 검색
+	 * @param disName
+	 * @return List<DiseaseVO>
+	 */
+	public List<DiseaseVO> retrieveDiseaseList(String disName);
+}

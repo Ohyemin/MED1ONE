@@ -1,0 +1,33 @@
+package kr.or.ddit.Free.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.Free.service.FreeService;
+import kr.or.ddit.Free.vo.FreeBoardVO;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/free/")
+public class FreeRetrieveController {
+	
+	private final FreeService service;
+
+	@RequestMapping("freeList.do")
+	public void boardList(Model model) {
+		List<FreeBoardVO> freeBoardList = service.retrieveBoardList();
+		System.out.println("프리보드"+freeBoardList);
+
+		model.addAttribute("freeBoard", freeBoardList);
+	}
+
+	@GetMapping("commentView.do")
+	public String commentView() {
+		return "commentView.do";
+	}
+}

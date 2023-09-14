@@ -1,0 +1,17 @@
+package kr.or.ddit.medical.nurse.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.medical.nurse.vo.DoctorSchdulVO;
+
+@Mapper
+public interface NurseDao {
+
+	/**
+	 * 의사 일정 전체 조회
+	 * @return
+	 */
+	public List<DoctorSchdulVO> selectDoctorList();
+}

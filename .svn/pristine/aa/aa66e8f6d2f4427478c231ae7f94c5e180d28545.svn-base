@@ -1,0 +1,35 @@
+package kr.or.ddit.medical.patient.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/patient/")
+public class PatientAssignController {
+
+	@GetMapping("patientInsert.do")
+	public String patientInsert() {
+		return "medical/patientAssign";
+	}
+	
+	@GetMapping("patientReception.do")
+	public String patientReception() {
+		return "medical/patientAssign";
+	}
+	
+	@GetMapping("clinicRetrieve.do")
+	public String clinicRetrieve() {
+		return "medical/patientAssign";
+	}
+	
+	@GetMapping("patientAssign.do")
+	public String patientAssign() {
+		return "medical/patientAssign";
+	}
+	
+	@GetMapping("examinatReception.do")
+	public String examinatReception() {
+		return "medical/patientAssign";
+	}
+}

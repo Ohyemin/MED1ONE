@@ -1,0 +1,39 @@
+package kr.or.ddit.employee.controller;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.employee.service.EmployeeService;
+import kr.or.ddit.employee.vo.DepartmentVO;
+
+@Controller
+@RequestMapping("/tree/")
+public class TreeController {
+
+	@Inject
+	private EmployeeService service;
+	
+	@GetMapping("treeList.do")
+	public String treeList(Model model) {
+		List<DepartmentVO> deptList = service.retrieveDept();
+		model.addAttribute( "deptList" ,deptList);
+		
+		return "medi/tree";
+	}
+	
+	
+	
+	
+	
+//	@RequestMapping("/emp/empTree.do")
+//	public String EmpTreeList(@RequestParam("code") String deptCode, Model model) {
+//		
+//	}
+}
+

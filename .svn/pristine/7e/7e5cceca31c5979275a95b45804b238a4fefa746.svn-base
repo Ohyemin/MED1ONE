@@ -1,0 +1,55 @@
+package kr.or.ddit.Free.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.Free.vo.CommentVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+@Service
+public class CommentServiceImpl implements CommentService {
+
+	@Override
+	public int createFreeComment(CommentVO comment) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<CommentVO> retrieveFreeCommentList(PaginationInfo<CommentVO> paging) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public long retrieveTotalRecord(PaginationInfo<CommentVO> paging) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public CommentVO retrieveFreeComment(String commentNo) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int modifyFreeComment(CommentVO commentVO) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int removeFreeComment(String commentNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int modifyFreeCommentLike(String commentNo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+}

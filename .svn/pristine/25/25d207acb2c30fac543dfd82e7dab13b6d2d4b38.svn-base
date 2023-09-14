@@ -1,0 +1,835 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8" buffer="8kb"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+
+
+<!-- plugin css file  -->
+
+<!-- plugin css file  -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/assets/plugin/datatables/responsive.dataTables.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/assets/plugin/datatables/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/assets/plugin/fullcalendar/main.min.css">
+<!-- project css file  -->
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/dist/assets/css/ihealth.style.min.css">
+
+
+
+<style type="text/css">
+.card-body {
+	height: 100px;
+}
+
+tr, td, th.sorting {
+	font-size: xx-small;;
+	text-align: center; /* 텍스트 정렬을 가운데로 설정 */
+}
+
+a.page-link {
+	font-size: xx-small;
+}
+
+li.pagelink {
+	width: 50px;
+	font-size: xx-small;;
+	text-align: center; /* 텍스트 정렬을 가운데로 설정 */
+}
+
+label {
+	font-size: 14px; /* 텍스트 크기 설정 */
+}
+
+input[type="search"] {
+	width: 100px !important; /* 입력칸의 길이 설정 */
+}
+
+ui {
+	width: 50px;
+	font-size: xx-small;;
+	text-align: center; /* 텍스트 정렬을 가운데로 설정 */
+}
+
+/* 민트색 버튼 스타일 */
+.mint-btn {
+	margin-left: 10px;
+	display: inline-block;
+	font-weight: 500;
+	line-height: 1.5;
+	text-align: center;
+	vertical-align: middle;
+	cursor: pointer;
+	color: #fff; /* 텍스트 색상 */
+	background-color: #6aab9c; /* 배경색 */
+	border-color: #6aab9c; /* 테두리 색상 */
+	user-select: none;
+	padding: 0.375rem 0.75rem;
+	font-size: 1.2em;
+	border-radius: 0.25rem;
+	float: right; /* 버튼을 오른쪽으로 부유(floating)시킴 */
+}
+
+/* 민트색 버튼 호버 효과 */
+.mint-btn:hover {
+	background-color: #5fa192; /* 호버시 배경색 변경 */
+	border-color: #5fa192; /* 호버시 테두리 색상 변경 */
+	/* 다른 호버 효과 (예: 텍스트 색상 변경) 추가 가능 */
+}
+
+/* 민트색 버튼 클릭 효과 */
+.mint-btn:active {
+	background-color: #5fa192; /* 클릭시 배경색 변경 */
+	border-color: #5fa192; /* 클릭시 테두리 색상 변경 */
+}
+
+/* 움직이는 텍스트 */
+.animated-title {
+	color: black;
+	font-size: 14px;
+	font-family: serif;
+	font-weight: 400;
+	position: relative;
+	width: 100%;
+	max-width: 100%;
+	height: 50px; /* 높이를 고정으로 설정, 원하는 크기로 조절 */
+	overflow: hidden;
+}
+
+.animated-title .track {
+	position: absolute;
+	white-space: nowrap;
+	will-change: transform;
+	animation: marquee 17s linear forwards;
+	/*forwards; 대신 infinite; 사용하면 반복, 애니메이션 시간을 조절 */
+}
+
+@
+keyframes marquee {from { transform:translateX(0);
+	
+}
+
+to {
+	transform: translateX(-100%);
+}
+
+}
+.content {
+	margin-left: 500px;
+}
+
+.custom-input {
+        width: 500px; 
+    }
+
+.nav-item{
+	width:100px;
+}
+
+.nav-link{
+	width:90px;
+}
+</style>
+
+
+	
+	
+	
+	<!--전체  -->
+<!-- 	<div id="ihealth-layout" class="theme-tradewind">  -->
+	<div  class="theme-tradewind"> 
+		<!-- main body area -->
+		<div class="main px-lg-4 px-md-4">
+			<!-- Body: Body -->
+			<div class="body d-flex py-3">
+				<div class="container-xxl">
+
+					<div class="animated-title" style="margin-bottom: -30px;">
+						<div class="track">
+							<div class="content">&nbsp;&nbsp;&nbsp;(Notice) 10월 13일
+								수요일은&nbsp;가정의 날입니다.&nbsp;정시퇴근하시어&nbsp; 가족과 함께 하시기
+								바랍니다.&nbsp;(메디원종합병원)&nbsp;</div>
+						</div>
+					</div>
+
+					<div
+						class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+						<h4 class="mb-0 fw-bold" style="color: #6aab9c;">호흡기내과 진료실</h4>
+					</div>
+
+					<!-- 1행 카드 시작 환자정보 & 처방내역 & 사진 -->
+					<div class="row g-3 mb-3">
+						<div class="col-md-4 col-lg-4"
+							style="width: 65%; margin-right: 1%;">
+							<!-- 				<div class="card" style="height: 300px"> -->
+
+							<div class="card mb-3" style="height: 150px;">
+								<div
+									class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0"
+									style="height: 0px;">
+									<h6 class="mb-0 fw-bold">환자정보</h6>
+									<button type="button" class="btn btn-outline-success"
+										style="font-size: smaller;">진료내역</button>
+								</div>
+								<div class="card-body" style="font-size: xx-small;">
+									<table class="table">
+										<thead>
+											<tr>
+												<th>환자코드</th>
+												<th>환자명</th>
+												<th>성별</th>
+												<th>나이</th>
+												<th>증상</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>10101</td>
+												<td>오혜민</td>
+												<td>여</td>
+												<td>만22세</td>
+												<td>기침, 두통</td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+								
+							</div> <!--cardbody  -->
+
+
+   					<div class="row no-gutters">
+					    <div class="col-md-3 col-lg-3"> <!-- 처방 오더, 25% 너비 -->
+					        <div class="card">
+					            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+					                <h6 class="mb-0 fw-bold"></h6>
+					            </div>
+					            <div class="card-body" style="height:150px;">
+					                <form>
+					                    <div>
+					                        <div ></div>
+					                    </div>
+					                </form>
+					            </div>
+					        </div>
+					    </div>
+					
+					    <div class="col-md-9 col-lg-9"> <!-- 그룹 오더, 75% 너비 -->
+					        <div class="card">
+					            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+					                <h6 class="mb-0 fw-bold">약품 처방</h6>
+					            </div>
+					            <div class="card-body" style="font-size: xx-small; height:150px;">
+					            <form>
+					            	<table class="table">
+           								 <thead>
+                								<tr>
+                    								<th>약품코드</th>
+                    								<th>약품명</th>
+                    								<th>1회투약량</th>
+                    								<th>단위</th>
+                    								<th>1일투약횟수</th>
+                    								<th>총투약일수</th>
+                    								<th>단가</th>
+                    								<th>총금액</th>
+                								</tr>
+            								</thead>
+            								<tbody id="">
+            								
+            								</tbody>
+					             	
+<!-- 					               		<div id="card2Content">Content for Card 2</div> -->
+					                 </table>
+					              </form>
+					            </div>
+					        </div>
+					    </div>
+					</div>
+					
+				</div>
+						<!--col-md-4 col-lg-4 end  -->
+
+
+						<div class="col-md-4 col-lg-4" style="width: 34%;">
+							<div class="card" style="height: 370px;">
+								<div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+									<h6 class="mb-0 fw-bold">처방내역</h6>
+								</div>
+								<div class="card-body"style="font-size: x-small;" >
+											<div class="row" style="margin-bottom: 10px;"> <!-- 가로로 정렬되도록 row 추가 -->
+		         								 <div class="col-md-2">
+		            								<p style="font-size: 14px; margin-top: 5px; margin-left: 10px;">상병코드</p>
+		         							 	</div>
+		          							<div class="col-md-10">
+		            							<div class="card p-3">
+		              								<div id="selectedValues1" style="font-size: 14px; color: blue;">
+		                								환자의 상병코드를 선택해주세요
+		              								</div>
+		            							</div>
+		            							<div class="card-body" style="font-size: x-small;">
+		                   			  				<button type="submit" class="mint-btn mt-1 fw-bold">취소</button>
+									  				<button type="submit" class="mint-btn mt-1 fw-bold">등록</button>
+		                   		   				</div>
+		          							</div>
+		        						</div><!-- row end -->
+		           		  				 	<div class="row" style="margin-bottom: 0px;"> <!-- 가로로 정렬되도록 row 추가 -->
+		         								 <div class="col-md-2">
+		            								<p style="font-size: 14px; margin-top: 5px; margin-left: 10px;">그룹오더</p>
+		         							 	</div>
+		          							<div class="col-md-10">
+		            							<div class="card p-3">
+		              								<div id="selectedValues2" style="font-size: 14px; color: blue;">
+		                								필요한 오더를 선택해주세요
+		              								</div>
+		            							</div>
+		            							
+		            							<div class="card-body" style="font-size: x-small;">
+		                   			  				<button type="submit" class="mint-btn mt-1 fw-bold">취소</button>
+									  				<button type="submit" class="mint-btn mt-1 fw-bold">등록</button>
+		                   		   				</div>
+		          							</div>
+		        						</div><!-- row end -->
+								     
+								</div>
+								
+							</div>
+						</div>
+				</div>
+
+					<!-- 1행 카드 종료 -->
+
+
+<!-- ================================================================================================================================================================= -->
+
+					<!-- 2행 카드 시작 -->
+					<div class="row g-3 mb-3">
+						<div class="col-md-6 col-lg-6"
+							style="width: 43%; margin-right: 1%;">
+							<div class="d-flex flex-column justify-content-between">
+								<div class="card" style="font-size: small; height: 400px;">
+									<div
+										class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0" style="height: 0px;">
+										<h6 class="mb-0 fw-bold">처방</h6>
+									</div>
+									
+									<div class="card-body">
+										
+										
+										<ul class="nav nav-tabs mb-3" id="myTab2" role="tablist">
+										
+										<li class="nav-item" role="presentation"><a
+											class="nav-link active" id="tab5-tab" data-bs-toggle="tab"
+											href="#tab5" role="tab" aria-controls="tab5"
+											aria-selected="true">상병 진단</a></li>
+										
+										<li class="nav-item" role="presentation">
+										<a class="nav-link" id="tab6-tab" data-bs-toggle="tab" href="#tab6" role="tab" aria-controls="tab6"
+											aria-selected="false">약품 검색</a></li>
+											
+										<li class="nav-item" role="presentation"><a
+											class="nav-link" id="tab6-tab" data-bs-toggle="tab"
+											href="#tab7" role="tab" aria-controls="tab7"
+											aria-selected="false">즐겨찾기</a></li>
+										<!-- search -->
+										<li class="nav-item" role="presentation" style="margin-left: 50px;">
+												<div class="input-group mb-3" style="width:180px;"> <!-- mb-4 -->
+													<span class="input-group-text" id="basic-addon1">
+														<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+														  <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"/>
+														  <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"/>
+														</svg>
+													</span>
+													<input type="search" class="form-control" id="searchForm" aria-controls="myDataTable" aria-label="Input group example" aria-describedby="basic-addon1" />
+												</div>
+										</li>	
+										
+									</ul>
+									<!-- 처방 li 탭 -->
+									<div class="tab-content" id="myTabContent">
+										
+										<!-- 상병 -->
+										<div class="tab-pane fade show active" id="tab5"
+											role="tabpanel" aria-labelledby="tab5-tab">
+											<table id="myProjectTable6" class="table table-hover align-middle mb-0" style=" height: 100px;">
+												<thead>
+													<tr>
+														<th>상병코드</th>														
+														<th>질병명</th>														
+														<th>선택</th>														
+													</tr>
+												</thead>
+												<tbody id="myProjectTable6">
+												
+												</tbody>
+											</table>
+										</div><!-- 상병 end -->
+										
+										
+										<!-- 약품 -->
+										<div class="tab-pane fade" id="tab6"
+											role="tabpanel" aria-labelledby="tab6-tab">
+											<table class="table table-hover align-middle mb-0" style="height: 100px;">
+												<thead>
+													<tr>
+														<th>약품코드</th>														
+														<th>약품명</th>														
+														<th>투여법</th>														
+														<th>선택</th>														
+													</tr>
+												</thead>
+												<tbody id="myProjectTable7">
+												
+												</tbody>
+											</table>
+										</div><!-- 약품 end -->
+										
+										
+										<div class="tab-pane fade" id="tab7"
+											role="tabpanel" aria-labelledby="tab7-tab">
+											<table class="table table-hover align-middle mb-0" style="height: 100px;">
+												<thead>
+													<tr>
+														<th>약품코드</th>														
+														<th>약품명</th>														
+														<th>투여법</th>														
+														<th>선택</th>														
+													</tr>
+												</thead>
+												<tbody id="myProjectTable8">
+												
+												</tbody>
+											</table>
+										</div><!-- 약품 end -->
+									
+									</div><!-- 처방 li탭 end -->
+									
+
+									</div>
+									<!-- card end -->
+								</div>
+								<!-- card end -->
+							</div>
+							<!--d-flex end  -->
+						</div>
+						<!--col-md-4 col-lg-4 end  -->
+	
+
+
+						<!-- 오더 탭 카드 -->
+						<div class="col-md-6 col-lg-6" style="width: 28%;">
+							<!-- 검사오더 검색 카드 내용 -->
+							<div class="card" style="font-size: small; height: 400px;">
+								<div
+									class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0" style="height: 0px;">
+									<h6 class="mb-0 fw-bold">그룹오더</h6>
+								</div>
+								<div class="card-body">
+									<!-- 검사 탭 2개 생성 -->
+									<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
+										<li class="nav-item" role="presentation" style="width:90px;">
+											<a class="nav-link active" id="tab1-tab" data-bs-toggle="tab"
+												href="#tab1" role="tab" aria-controls="tab1"
+												aria-selected="true" style="width:90px;">일반검사</a>
+										</li>
+										<li class="nav-item" role="presentation" style="width:90px;">
+											<a class="nav-link" id="tab2-tab" data-bs-toggle="tab"
+												href="#tab2" role="tab" aria-controls="tab2"
+												aria-selected="false" style="width:90px;" >장비검사</a>
+										</li>
+										<li class="nav-item" role="presentation" style="width:90px;">
+											<a class="nav-link" id="tab3-tab" data-bs-toggle="tab"
+												href="#tab3" role="tab" aria-controls="tab3"
+												aria-selected="false" style="width:90px;">입원오더</a>
+										</li>
+										<li class="nav-item" role="presentation" style="width:90px;">
+											<a class="nav-link" id="tab4-tab" data-bs-toggle="tab"
+												href="#tab4" role="tab" aria-controls="tab4" aria-selected="false" style="width:90px;">
+												주사</a>
+										</li>
+									</ul>
+
+									<!-- 검사 탭 내용 -->
+									<div class="tab-content" id="myTabContent">
+										<!-- 첫 번째 탭 -->
+										<div class="tab-pane fade show active" id="tab1"
+											role="tabpanel" aria-labelledby="tab1-tab">
+											<table id="myProjectTable2"
+												class="table table-hover align-middle mb-0"
+												style="width: 300px; height: 100px;">
+												<thead>
+													<tr>
+														<th>검사코드</th>
+														<th>검사명</th>
+														<th>선택</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>20011</td>
+														<td>혈액검사</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="혈액검사"></td>
+													</tr>
+													<tr>
+														<td>20012</td>
+														<td>소변검사</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="소변검사"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- 첫 번째 탭 내용 끝 -->
+
+										<!-- 두 번째 탭 -->
+										<div class="tab-pane fade" id="tab2" role="tabpanel"
+											aria-labelledby="tab2-tab">
+											<table id="myProjectTable3"
+												class="table table-hover align-middle mb-0"
+												style="width: 300px; height: 100px;">
+												<thead>
+													<tr>
+														<th>검사코드</th>
+														<th>검사명</th>
+														<th>선택</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>20011</td>
+														<td>MRI</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="MRI"></td>
+													</tr>
+													<tr>
+														<td>20012</td>
+														<td>CT</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="CT"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- 두 번째 탭 내용 끝 -->
+										<!-- 세번째 탭 -->
+										<div class="tab-pane fade" id="tab3" role="tabpanel"
+											aria-labelledby="tab3-tab">
+											<table id="myProjectTable4"
+												class="table table-hover align-middle mb-0"
+												style="width: 300px; height: 100px;">
+												<thead>
+													<tr>
+														<th>입원오더</th>
+														<th>오더내용</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>입원권고</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="입원권고"></td>
+													</tr>
+													<tr>
+														<td>식이(일반식)</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="일반식"></td>
+													</tr>
+													<tr>
+														<td>권고일자</td>
+														<td><input type="date" class="myDateInput"></td>
+													</tr>
+													<tr>
+														<td>권고기간</td>
+														<td><input type="text" class="myTextInput1"></td>
+													</tr>
+													<tr>
+														<td>기타오더</td>
+														<td><input type="text" class="myTextInput2"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- 세번째 탭 내용 끝 -->
+
+
+										<!-- 네번째 탭 -->
+										<div class="tab-pane fade" id="tab4" role="tabpanel"
+											aria-labelledby="tab4-tab">
+											<table id="myProjectTable5"
+												class="table table-hover align-middle mb-0"
+												style="width: 300px; height: 100px;">
+												<thead>
+													<tr>
+														<th>주사오더</th>
+														<th>오더내용</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>주사</td>
+														<td><input type="checkbox" class="myCheckbox2"
+															value="주사"></td>
+													</tr>
+													<tr>
+														<td>주사내용</td>
+														<td><input type="text" class="myTextInput3"></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+										<!-- 네번째 탭 내용 끝 -->
+									</div>
+									<!-- content end -->
+								</div>
+								<!--cardbody  -->
+							</div>
+							<!--card  -->
+						</div>
+						<!-- col-md-6 col-lg-6 col-xl-6 end -->
+
+						<div class="col-md-6 col-lg-6" style="width: 27%; margin-right: 1%;">
+							<div class="col-md-6 col-lg-6 col-xl-6"
+								style="width: 100%; margin-right: 1%">
+								<div class="card" style="height: 400px;"> <!--  -->
+									<div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+										<h6 class="mb-0 fw-bold">진료소견</h6>
+									</div>
+									<div class="card-body" style="font-size: x-small;">
+										<textarea class="form-control mb-3"
+											style="height: 100px; font-size: x-small;"
+											placeholder="진료소견 작성"></textarea>
+										<button type="submit" class="mint-btn mt-1 fw-bold">서류목록</button>
+										<button type="submit" class="mint-btn mt-1 fw-bold">소견서
+											생성</button>
+									</div>
+									<!-- cardBody end -->
+								</div>
+								<!-- card end -->
+							</div>
+						</div>
+					</div>
+					<!-- row g-3 mb-3 end -->
+
+					<!--2행 종료  -->
+					
+
+				</div>
+				<!--컨테이너  -->
+			</div>
+			<!--바디  -->
+		</div>
+		<!--메인바디  -->
+	</div>
+	<!--클래스  -->
+
+<%-- 
+<!-- Jquery Core Js -->
+<script src="<%=request.getContextPath()%>/resources/dist/assets/bundles/libscripts.bundle.js"></script> --%>
+
+<!-- Plugin Js-->
+<script src="<%=request.getContextPath()%>/resources/dist/assets/plugin/fullcalendar/main.min.js"></script>
+<script src="<%=request.getContextPath()%>/resources/dist/assets/bundles/apexcharts.bundle.js"></script>
+<script src="<%=request.getContextPath()%>/resources/dist/assets/bundles/dataTables.bundle.js"></script>
+
+<!-- Jquery Page Js -->
+<script src="<%=request.getContextPath()%>/resources/js/template.js"></script>
+<script src="<%=request.getContextPath()%>/resources/js/page/doctor-profile.js"></script> 
+
+<script>
+
+
+// 그룹오더
+let checkboxes2 = document.querySelectorAll('.myCheckbox2');
+let selectedValuesElement2 = document.getElementById('selectedValues2');
+let dateInput = document.querySelector('.myDateInput');
+let textInput1 = document.querySelector('.myTextInput1');
+let textInput2 = document.querySelector('.myTextInput2');
+let textInput3 = document.querySelector('.myTextInput3');
+
+function updateSelectedValues() {
+	let selectedCheckboxes = Array.from(checkboxes2)
+        .filter(c => c.checked)
+        .map(c => c.value);
+
+	let selectedDate = dateInput.value;
+	let selectedText1 = textInput1.value;
+	let selectedText2 = textInput2.value;
+	let selectedText3 = textInput3.value;
+
+	let selectedValues = [];
+    if (selectedCheckboxes.length > 0) {
+        selectedValues.push(selectedCheckboxes.join(', '));
+    }
+    if (selectedDate) {
+        selectedValues.push(selectedDate);
+    }
+    if (selectedText1) {
+        selectedValues.push(selectedText1);
+    }
+    if (selectedText2) {
+        selectedValues.push(selectedText2);
+    }
+    if (selectedText3) {
+        selectedValues.push(selectedText3);
+    }
+
+    selectedValuesElement2.innerHTML = selectedValues.join(', ');
+}
+
+checkboxes2.forEach(checkbox => {
+    checkbox.addEventListener('change', updateSelectedValues);
+});
+
+dateInput.addEventListener('change', updateSelectedValues);
+textInput1.addEventListener('input', updateSelectedValues);
+textInput2.addEventListener('input', updateSelectedValues);
+textInput3.addEventListener('input', updateSelectedValues);
+
+
+
+
+    
+    /* 상병코드 */
+    $('#myDataTable')
+    .addClass( 'nowrap' )
+    .dataTable( {
+        responsive: true,
+        columnDefs: [
+            { targets: [-1, -3], className: 'dt-body-right' }
+        ]
+    });
+    
+    /* 약품코드 */
+    $('#myDataTable2')
+    .addClass( 'nowrap' )
+    .dataTable( {
+        responsive: true,
+        columnDefs: [
+            { targets: [-1, -3], className: 'dt-body-right' }
+        ]
+    });
+    
+    /* 약품검색 */
+   let mediSearchForm = $("#searchForm").on("change",function(event){
+	   let what = $(this).val();
+	   $.getJSON("<c:url value='/clinic/medicineSearch.do' />", {what:what}).done(function(resp){
+			let tbody = $("#myProjectTable7");   
+			tbody.empty();
+			if(resp.length>0){
+				$(resp).each(function(idx,mediList ){
+					let tr = $("<tr>").append(
+						$("<td>").html(mediList.mediCode)
+						,$("<td>").html(mediList.mediNm)
+						,$("<td>").html(mediList.mediMth)
+						,$("<td>").append(
+							$("<input>").attr({
+		                        type: "checkbox",
+		                        class: "myCheckbox1",
+		                        value: mediList.mediCode
+		                     })
+						) 
+						
+					);
+					tbody.append(tr);
+				});
+				
+			}else {
+				tbody.append(
+					$("<tr>").html(
+						$("<td colspan='4'>").html("해당 약품이 존재하지 않습니다.")		
+					)		
+				);
+			}
+	   });
+   
+   });
+    
+    
+    
+    
+    
+    
+    
+    
+   /* 상병검색 */
+   let disSearchForm = $("#searchForm").on("change",function(event){
+	   let what = $(this).val();
+	   $.getJSON("<c:url value='/clinic/diseaseSearch.do' />", {what:what}).done(function(resp){
+			let tbody = $("#myProjectTable6");   
+			tbody.empty();
+			if(resp.length>0){
+				$(resp).each(function(idx,disList ){
+					let tr = $("<tr>").append(
+						$("<td>").html(disList.dssCode)
+						,$("<td>").html(disList.dssNm)
+						,$("<td>").append(
+							$("<input>").attr({
+		                        type: "checkbox",
+		                        class: "myCheckbox1",
+		                        value: disList.dssCode
+		                     })
+						),
+	                    $("<input>").attr({
+	                        type: "hidden",          
+	                        name: "dssNo",           
+	                        value: disList.dssNo     
+	                    }) 
+					);
+					tbody.append(tr);
+				});
+				
+			}else {
+				tbody.append(
+					$("<tr>").html(
+						$("<td colspan='3'>").html("해당 병명이 존재하지 않습니다.")		
+					)		
+				);
+			}
+	   });
+   
+   });
+	
+   /* 즐겨찾기 */
+   $.getJSON("<c:url value='/clinic/popularMedicineList.do' />").done(function(resp){
+	   let tbody = $("#myProjectTable8");
+	   $(resp).each(function(idx,popList ){
+		   let tr = $("<tr>").append(
+				 $("<td>").html(popList.mediCode)
+				,$("<td>").html(popList.mediNm)
+				,$("<td>").html(popList.mediMth)
+				,$("<td>").append(
+					$("<input>").attr({
+	                     type: "checkbox",
+	                     class: "myCheckbox1",
+	                     value: popList.mediCode
+	                 })
+				)	   
+		   );
+		   tbody.append(tr)
+	   });
+   });
+
+   
+   //상병 체크박스 클릭했을때 오더 영역에 보이기 
+   
+   
+   
+   $(document).ready(function() {
+	    let selectedValues1 = $("#selectedValues1");
+	    selectedValues1.empty();
+	    $("#myProjectTable6").on("change", ".myCheckbox1", function() {
+	            let dssNm = $(this).closest("tr").find("td:eq(1)").text();
+	            let dssCode = $(this).val();
+	            let dssNo = $(this).closest("tr").find("input[name='dssNo']").val();
+
+	            selectedValues1.append(dssNm + "<br>");
+	    });
+	});
+
+
+
+
+
+
+
+  
+    
+    
+</script>

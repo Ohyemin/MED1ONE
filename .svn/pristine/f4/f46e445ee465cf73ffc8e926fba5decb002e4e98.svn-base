@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.medical.administ.dao.AdministDao">
+
+<!-- 환자 정보 조회 -->
+<select id="selectPatientList" resultType="PatientVO">
+	SELECT 
+		  PATNT_CODE
+		, PATNT_NM
+		, PATNT_IDENTINO
+		, PATNT_TELNO
+		, PATNT_ADDR1
+		, PATNT_ADDR2
+		, PATNT_ZIPCODE
+		, HEIGHT
+		, WEIGHT
+		, GEN
+		, PAT_EMAIL
+	 FROM PATIENT
+	WHERE PATNT_NM  LIKE '%' ||  #{patntNm} || '%'
+</select>
+
+<!-- 환자 접수 -->
+<insert id="insertPatient" parameterType="PatientVO">
+	<selectKey order="BEFORE" resultType="String" keyProperty="patntCode">
+		SELECT 'PNT' || LPAD(PATNT_CODE_SEQ.NEXTVAL,4,'0')
+		FROM DUAL
+	</selectKey>
+	INSERT INTO PATIENT (
+	  	PATNT_CODE
+		, PATNT_NM
+		, PATNT_IDENTINO
+		, PATNT_TELNO
+		, PATNT_ADDR1
+		, PATNT_ADDR2
+		, PATNT_ZIPCODE
+		, HEIGHT
+		, WEIGHT
+		, GEN
+		, PATNT_REGIST
+		, PAT_EMAIL
+	) VALUES (
+		  #{patntCode,jdbcType=VARCHAR}
+		, #{patntNm,jdbcType=VARCHAR}
+		, #{patntIdentino,jdbcType=VARCHAR}
+		, #{patntTelno,jdbcType=VARCHAR}
+		, #{patntAddr1,jdbcType=VARCHAR}
+		, #{patntAddr2,jdbcType=VARCHAR}
+		, #{patntZipcode,jdbcType=VARCHAR}
+		, #{height,jdbcType=VARCHAR}
+		, #{weight,jdbcType=VARCHAR}
+		, #{gen,jdbcType=CHAR}
+		, SYSDATE
+		, #{patEmail,jdbcType=VARCHAR}
+	)
+</insert>
+
+</mapper>

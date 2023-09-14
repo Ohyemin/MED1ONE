@@ -1,0 +1,16 @@
+package kr.or.ddit.medical.examinate.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.examinate.vo.MdexmnDtl;
+import kr.or.ddit.medical.examinate.vo.MdexmnPackVO;
+
+public interface MdexmnService {
+
+	/**
+	 * 환자의 검진 목록 전체 조회
+	 * @param mdexmnDtlCode
+	 * @return
+	 */
+	public List<MdexmnPackVO> retrieveMdexnm(String recCode);
+}

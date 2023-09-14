@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.or.ddit.medical.clinc.dao.InspectionDao">
+
+	<!-- 검사대기(007) 검사중(008) 인 환자 조회 -->
+	<select id="selectInspPatntStat" resultType="ClinicVO">
+		WITH CTE AS (
+		    SELECT
+		        P.PATNT_NM 
+		        ,P.PATNT_CODE
+                ,P.PATNT_IDENTINO
+		        ,R.REC_CODE
+                ,R.SYMPTOM
+		        ,S.STAT_CODE
+		        ,S.STAT_TIME
+		        ,S.FCLTY_CODE
+		        ,ROW_NUMBER() OVER (PARTITION BY R.REC_CODE ORDER BY S.STAT_TIME DESC) AS RN
+		    FROM
+		        PATIENT P
+		        INNER JOIN RECEPTION R ON P.PATNT_CODE = R.PATNT_CODE
+		        INNER JOIN PATNT_STAT S ON S.REC_CODE = R.REC_CODE
+             
+		)
+		SELECT
+                       
+            SUBSTR(PATNT_IDENTINO, 1, 2) || '-' || SUBSTR(PATNT_IDENTINO, 3, 2) || '-' || SUBSTR(PATNT_IDENTINO, 5, 2) "RECEP.PATNT.PATNTIDENTINO"
+		    ,CTE.PATNT_NM "RECEPT.PATNT.PATNTNM"
+		    ,CTE.PATNT_CODE "RECEPT.PATNTCODE"
+		    ,CTE.REC_CODE
+		    ,CTE.STAT_CODE "RECEPT.PATSTAT.STATCODE"
+		    ,CTE.STAT_TIME 
+		    ,CTE.FCLTY_CODE "RECEPT.PATSTAT.FCLTYCODE"
+            ,C.REC_CODE
+            ,C.CLINIC_CONTENT
+		FROM
+		    CLINIC C
+            INNER JOIN CTE ON(CTE.REC_CODE = C.REC_CODE)
+		WHERE
+		    RN = 1 AND FCLTY_CODE = #{fcltyCode}
+		ORDER BY
+		    CTE.REC_CODE
+	</select>
+	
+	<!-- 검사대기(007) -> 검사중(008) insert -->
+	<insert id="insertInspStat" parameterType="PatntStatVO">
+	
+		INSERT INTO PATNT_STAT (
+		    STAT_CODE
+		    , REC_CODE
+		    , FCLTY_CODE
+		    , STAT_TIME
+		) VALUES (
+		    '008'
+		  ,  #{recCode,jdbcType=VARCHAR}
+		  , #{fcltyCode,jdbcType=VARCHAR}
+		  , SYSDATE
+		)
+		
+	</insert>
+	
+	<!-- 환자의 검사목록 출력 -->
+	<select id="selectInspOrdList" resultType="InspOrderVO" parameterType="String">
+	
+		SELECT O.CLINIC_CODE
+				,O.INSP_CODE
+				,O.REC_CODE 
+				,I.INSP_NM "INSP.INSPNM"
+				,I.FCLTY_CODE "INSP.FCLTYCODE"
+				,F.FCLTY_NM "INSP.FCLTY.FCLTYNM"
+		FROM INSP_ORDER O
+			INNER JOIN INSPECTION I ON(O.INSP_CODE = I.INSP_CODE)
+			INNER JOIN FCLTY_INFO F ON (I.FCLTY_CODE = F.FCLTY_CODE)
+		WHERE O.REC_CODE = #{recCode}
+		
+	</select>
+
+</mapper>

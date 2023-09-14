@@ -1,0 +1,60 @@
+package kr.or.ddit.medical.clinc.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.medical.clinc.dao.ClinicDao;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+
+@Service
+public class ClinicServiceImpl implements ClinicService {
+	
+	@Inject
+	private ClinicDao clinicDao;
+	
+	@Override
+	public List<MedicineVO> retrievePagingList(PaginationInfo<MedicineVO> paging) {
+		long totalRecord = clinicDao.selectTotalRecord(paging);
+		paging.setTotalRecord(totalRecord);
+		return clinicDao.selectPagingList(paging);
+	}
+
+	/**
+	 *  약품 리스트 검색
+	 */
+	@Override
+	public List<MedicineVO> retrieveMedicineList(String mediName) {
+		return clinicDao.selectMedicineList(mediName);
+	}
+
+	/**
+	 *  상병 리스트 검색
+	 */
+	@Override
+	public List<DiseaseVO> retrieveDiseaseList(String disName) {
+		return clinicDao.selectDiseaseList(disName);
+	}
+
+	/**
+	 * 약품 검색수
+	 */
+	@Override
+	public int SearchCnt(String mediName) {
+		return clinicDao.SearchCnt(mediName);
+	}
+
+	/**
+	 * 즐겨찾는 약품 리스트
+	 */
+	@Override
+	public List<MedicineVO> popluarMedicineList() {
+		return clinicDao.popluarMedicineList();
+	}
+	
+
+}

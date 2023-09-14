@@ -1,0 +1,15 @@
+package kr.or.ddit.medical.receive.service;
+
+import java.util.List;
+
+import kr.or.ddit.medical.clinc.vo.PresDocVO;
+
+public interface ReceiveService {
+	
+	/**
+	 * 외래진료 수납대기인 환자리스트 조회
+	 * @return
+	 */
+	public List<PresDocVO> retrievePatientList();
+	
+}

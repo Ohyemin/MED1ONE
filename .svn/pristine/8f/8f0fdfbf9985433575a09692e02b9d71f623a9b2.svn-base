@@ -1,0 +1,21 @@
+package kr.or.ddit.employee.mypage.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/mypage/")
+public class MypageController {
+
+	@GetMapping("mypage.do")
+	public String mypage() {
+		return "mypage/mypage";
+	}
+	
+	@GetMapping("mypageUpdate.do")
+	public String mypageUpdate() {
+		return "mypage/mypageForm";
+	}
+	
+}

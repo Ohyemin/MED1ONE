@@ -1,0 +1,457 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" buffer="8kb"%>
+
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>:: I-Health::  Dashboard </title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon"> <!-- Favicon-->
+    <!-- plugin css file  -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/dist/assets/plugin/datatables/responsive.dataTables.min.css">
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/dist/assets/plugin/datatables/dataTables.bootstrap5.min.css">
+    <!-- project css file  -->
+    <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/dist/assets/css/ihealth.style.min.css">
+</head>
+<body>
+
+<!--전체  -->
+<div id="ihealth-layout" class="theme-tradewind">
+    <!-- main body area -->
+    <div class="main px-lg-4 px-md-4">
+
+
+        <!-- Body: Body -->
+        <div class="body d-flex py-3">
+            <div class="container-xxl">
+            
+            <!--첫번째 통계표 시작  -->
+                <div class="row g-3 mb-3">
+                    <div class="col-md-12 col-lg-8 col-xl-8">
+                        <div class="card">
+                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                <h6 class="mb-0 fw-bold ">Patient Statistics</h6>
+                            </div>
+                            <div class="card-body">
+                                <div id="#"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                   <!--첫번째 통계표 종료 -->
+                
+               <!--2번째행 시작  -->
+                <div class="row g-3 mb-3 row-deck"> <!--rowdeck : 열을 균등하게 나눔  -->
+                
+                
+                   <!--토탈 통계표 시작  -->
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                <h6 class="mb-0 fw-bold ">Hospitality Status</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="row g-3 row-deck">
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="card">
+                                            <div class="card-body ">
+                                               
+                                                <h6 class="mt-3 mb-0 fw-bold small-14">Total Appointment</h6>
+                                                <span class="text-muted">400</span>
+                                                
+                                                
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                      <!--토탈 통계표 종료  -->
+                    
+                    <!--기본처방내역  시작 -->
+                    <div class="col-lg-12 col-xl-6">
+                        <div class="card">
+                            <div class="card-header py-3 d-flex  bg-transparent border-bottom-0">
+                                <h6 class="mb-0 fw-bold ">외래오더</h6>
+                            </div>
+                            <div class="card-body">
+									<div class="container">
+										<ul class="nav nav-tabs mt-3" id="myTabs" role="tablist">
+											<li class="nav-item" role="presentation">
+												<button class="nav-link active" id="tab1-tab"
+													data-bs-toggle="tab" data-bs-target="#tab1" type="button"
+													role="tab" aria-controls="tab1" aria-selected="true">상병</button>
+											</li>
+											<li class="nav-item" role="presentation">
+												<button class="nav-link" id="tab2-tab" data-bs-toggle="tab"
+													data-bs-target="#tab2" type="button" role="tab"
+													aria-controls="tab2" aria-selected="false">투약</button>
+											</li>
+											<li class="nav-item" role="presentation">
+												<button class="nav-link" id="tab3-tab" data-bs-toggle="tab"
+													data-bs-target="#tab3" type="button" role="tab"
+													aria-controls="tab3" aria-selected="false">검사</button>
+											</li>
+											<li class="nav-item" role="presentation">
+												<button class="nav-link" id="tab4-tab" data-bs-toggle="tab"
+													data-bs-target="#tab4" type="button" role="tab"
+													aria-controls="tab4" aria-selected="false">주사</button>
+											</li>
+											<li class="nav-item" role="presentation">
+												<button class="nav-link" id="tab5-tab" data-bs-toggle="tab"
+													data-bs-target="#tab5" type="button" role="tab"
+													aria-controls="tab5" aria-selected="false">진료</button>
+											</li>
+										</ul>
+										
+										
+										<!--탭 시작  -->
+										<div class="tab-content mt-3" id="myTabContent">
+										
+										
+											<div class="tab-pane fade show active" id="tab1" role="tabpanel" aria-labelledby="tab1-tab">
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox1"> <label class="form-check-label" for="checkbox1">Item 1</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox2"> <label class="form-check-label" for="checkbox2">Item 2</label>
+												</div>
+												<!-- Add more checkboxes as needed -->
+											</div>
+											
+											
+											<div class="tab-pane fade" id="tab2" role="tabpanel" aria-labelledby="tab2-tab">
+												<!-- Add checkboxes for Tab2 -->
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox1"> <label class="form-check-label" for="checkbox1">Item 1</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox2"> <label class="form-check-label" for="checkbox2">Item 2</label>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="tab3" role="tabpanel" aria-labelledby="tab3-tab">
+												<!-- Add checkboxes for Tab3 -->
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox1"> <label class="form-check-label" for="checkbox1">Item 1</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox2"> <label class="form-check-label" for="checkbox2">Item 2</label>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="tab4" role="tabpanel" aria-labelledby="tab4-tab">
+												<!-- Add checkboxes for Tab4 -->
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox1"> <label class="form-check-label" for="checkbox1">Item 1</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox2"> <label class="form-check-label" for="checkbox2">Item 2</label>
+												</div>
+											</div>
+											<div class="tab-pane fade" id="tab5" role="tabpanel" aria-labelledby="tab5-tab">
+												<!-- Add checkboxes for Tab5 -->
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox1"> <label class="form-check-label" for="checkbox1">Item 1</label>
+												</div>
+												<div class="form-check">
+													<input class="form-check-input" type="checkbox" id="checkbox2"> <label class="form-check-label" for="checkbox2">Item 2</label>
+												</div>
+											</div>
+										</div>
+										
+										<!--탭 종료 -->
+										
+										
+										              
+       <div class="container">
+    <ul class="nav nav-tabs mt-3" id="myTabs" role="tablist">
+      <!-- Tab headers -->
+      <!-- Add your tab headers here -->
+    </ul>
+    <div class="tab-content mt-3" id="myTabContent">
+      <!-- Tab contents -->
+      <!-- Add your tab contents here -->
+    </div>
+    <div class="mt-3">
+      <h4>장바구니</h4>
+      <ul id="cartItems" class="list-group">
+        <!-- Cart items will be displayed here -->
+      </ul>
+    </div>
+  </div>            
+										
+										
+										
+										
+								</div><!-- 컨테이너 -->
+							</div>  <!--카드바디  -->
+                        </div><!--카드  -->
+                    </div>
+                       <!--기본 처방내역 종료  -->
+                    
+                </div>
+                   <!--2번째 행 종료 -->
+                
+                
+                
+               
+               
+               <!--3행시작  -->
+                <div class="row g-3 mb-3">
+                
+                
+                
+                    <!--3-1번째행시작  -->
+                    <div class="col-xl-8 col-lg-12 flex-column"> <!-- flex-column : 자식요소를 세로로 배치 -->
+                    
+                    
+                        
+                        <!--환자리스트  -->
+                        <div class="card">
+                            <div class="card-header py-3 d-flex justify-content-between bg-transparent border-bottom-0">
+                                <h6 class="mb-0 fw-bold ">진료대기환자 조회</h6>
+                            </div>
+                            
+                            
+                            <div class="card-body">
+                                <table id="myDataTable" class="table table-hover align-middle mb-0" style="width: 100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>Patients</th>
+                                            <th>Adress</th>
+                                            <th>Admited</th>
+                                            <th>Discharge</th>
+                                            <th>Progress</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar3.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Molly </span></td>
+                                            <td>70 Bowman St. South Windsor, CT 06074</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 16, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"> <span class="sr-only">40% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info">Admit</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar1.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Brian</span></td>
+                                            <td>123 6th St. Melbourne, FL 32904</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 22, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar2.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Julia</span></td>
+                                            <td>4 Shirley Ave. West Chicago, IL 60185</td>
+                                            <td>May 17, 2021</td>
+                                            <td>May 16, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar4.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Sonia</span></td>
+                                            <td>123 6th St. Melbourne, FL 32904</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 23, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="15" aria-valuemin="0" aria-valuemax="100" style="width: 15%;"> <span class="sr-only">15% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info">Admit</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar5.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Adam H</span></td>
+                                            <td>4 Shirley Ave. West Chicago, IL 60185</td>
+                                            <td>May 18, 2021</td>
+                                            <td>May 18, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100" style="width: 85%;"> <span class="sr-only">85% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info">Admit</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar9.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Alexander</span></td>
+                                            <td>123 6th St. Melbourne, FL 32904</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 22, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar11.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Gabrielle</span></td>
+                                            <td>4 Shirley Ave. West Chicago, IL 60185</td>
+                                            <td>May 17, 2021</td>
+                                            <td>May 16, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar12.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Grace</span></td>
+                                            <td>4 Shirley Ave. West Chicago, IL 60185</td>
+                                            <td>May 17, 2021</td>
+                                            <td>May 16, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar8.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Ryan </span></td>
+                                            <td>70 Bowman St. South Windsor, CT 06074</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 16, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%;"> <span class="sr-only">40% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-info">Admit</span></td>
+                                        </tr>
+                                        <tr>
+                                            <td><img src="<%=request.getContextPath() %>/resources/dist/assets/images/xs/avatar7.jpg" class="avatar sm rounded-circle me-2" alt="profile-image"><span>Christian</span></td>
+                                            <td>123 6th St. Melbourne, FL 32904</td>
+                                            <td>May 13, 2021</td>
+                                            <td>May 22, 2021</td>
+                                            <td>
+                                                <div class="progress" style="height: 3px;">
+                                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"> <span class="sr-only">100% Complete</span> </div>
+                                                </div>
+                                            </td>
+                                            <td><span class="badge bg-success">Discharge</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                         <!--환자리스트  -->
+                         
+                         
+                    </div>
+                    <!--3-1번째 종료  -->
+                    
+        
+                    
+                    
+                    
+                    
+                    
+                    
+           <!--3-2번째 열 시작  -->
+                    <div class="col-xl-4 col-lg-12 flex-column">
+                          <!--오른쪽 하단 박스영역  -->
+                        <div class="card bg-secondary position-relative">
+                            <div class="card-body text-center p-4 text-white">
+                                
+                            </div>
+                        </div>
+                        <!--오른쪽 하단 박스영역  -->
+                    </div>
+                    <!--3-2번째 열 종료 -->
+                    
+                </div><!-- .row end -->   <!--3행종료  -->
+                
+                
+                
+                
+            </div>
+        </div>    <!--body  -->
+        
+         
+	</div><!--main body area -->
+</div><!--전체  -->
+       
+  
+
+
+<!-- Jquery Core Js -->
+<script src="<%=request.getContextPath() %>/resources/dist/assets/bundles/libscripts.bundle.js"></script>
+
+<!-- Plugin Js -->
+<script src="<%=request.getContextPath() %>/resources/dist/assets/bundles/apexcharts.bundle.js"></script>
+<script src="<%=request.getContextPath() %>/resources/dist/assets/plugin/jqueryuicalandar/jquery-ui.min.js"></script>
+<script src="<%=request.getContextPath() %>/resources/dist/assets/plugin/owlcarousel/owl.carousel.js"></script>
+<script src="<%=request.getContextPath() %>/resources/dist/assets/bundles/dataTables.bundle.js"></script>      
+
+<!-- Jquery Page Js -->
+<script src="<%=request.getContextPath() %>/resources/js/template.js"></script>
+<script src="<%=request.getContextPath() %>/resources/js/page/index.js"></script>
+ <script>
+      $('#myDataTable')
+      .addClass( 'nowrap' )
+      .dataTable( {
+          responsive: true,
+          columnDefs: [
+              { targets: [-1, -3], className: 'dt-body-right' }
+          ]
+      });
+      
+      
+      <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll(".form-check-input");
+        const cartItemsContainer = document.getElementById("cartItems");
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", function () {
+            if (this.checked) {
+              addToCart(this);
+            } else {
+              removeFromCart(this);
+            }
+          });
+        });
+
+        function addToCart(item) {
+          const itemName = item.nextElementSibling.innerText;
+          const cartItemElement = document.createElement("li");
+          cartItemElement.className = "list-group-item";
+          cartItemElement.innerText = itemName;
+          cartItemsContainer.appendChild(cartItemElement);
+        }
+
+        function removeFromCart(item) {
+          const itemName = item.nextElementSibling.innerText;
+          const cartItems = cartItemsContainer.querySelectorAll(".list-group-item");
+          cartItems.forEach((cartItem) => {
+            if (cartItem.innerText === itemName) {
+              cartItem.remove();
+            }
+          });
+        }
+      });
+    </script>
+      
+      
+ </script>
+</body>
+</html> 

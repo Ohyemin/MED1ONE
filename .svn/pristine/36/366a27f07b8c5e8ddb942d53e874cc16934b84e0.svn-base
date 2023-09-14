@@ -1,0 +1,44 @@
+package kr.or.ddit.employee.vo;
+
+import javax.validation.constraints.NotBlank;
+
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+@Data
+@EqualsAndHashCode(of = "empNo")
+public class EmployeeVO {
+
+	@NotBlank
+	private String empNo;
+	@NotBlank
+	private String deptCode;
+	@NotBlank
+	private String empNm;
+	@NotBlank
+	private String empPw;
+	@NotBlank
+	private String empTelno;
+	@NotBlank
+	private String empIdentino;
+	@NotBlank
+	private String empEmail;
+	@NotBlank
+	private String empAddr1;
+	@NotBlank
+	private String empAddr2;
+	@NotBlank
+	private String empZipcode;
+	@NotBlank
+	private String jncmpYmd;
+	private String rsgntnYmd;
+	@NotBlank
+	private String hdofYn;
+	@NotBlank
+	private String aprvYn;
+	@NotBlank
+	private String empRole;
+	
+	@NotBlank
+	private DepartmentVO dept;
+}

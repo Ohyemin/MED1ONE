@@ -1,0 +1,24 @@
+package kr.or.ddit.medical.nurse.vo;
+
+import java.time.LocalDate;
+
+import javax.validation.constraints.NotBlank;
+
+import lombok.Data;
+
+@Data
+public class DoctorSchdulVO {
+	@NotBlank
+	private String doctrDate;
+	@NotBlank
+	private String docwkCode;
+	@NotBlank
+	private String docEmpNo;
+	private String doctrWrter;
+	@NotBlank
+	private LocalDate doctrRgsde;
+	private String doctorUpwrter;
+	private LocalDate doctrUpdde;
+	private String doctrAttend;
+	private String doctrLeaving;
+}

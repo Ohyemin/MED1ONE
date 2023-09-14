@@ -1,0 +1,19 @@
+package kr.or.ddit.notice.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
+@RequestMapping("/notice/")
+public class NoticeRetrieveController {
+
+	@GetMapping("noticeList.do")
+	public String noticeList() {
+		return "notice/noticeList";
+	}
+	@GetMapping("noticeDetail.do")
+	public String noticeDetail() {
+		return "notice/noticeDetail";
+	}
+}

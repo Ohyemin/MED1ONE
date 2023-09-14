@@ -1,0 +1,38 @@
+package kr.or.ddit.notice.vo;
+
+import java.time.LocalDateTime;
+
+import javax.validation.constraints.NotBlank;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
+
+import kr.or.ddit.employee.vo.EmployeeVO;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
+/**
+ * 공지게시판VO
+ * @author PC-10
+ *
+ */
+@Data
+@EqualsAndHashCode(of="noticeCode")
+public class NoticeBoardVO {
+	@NotBlank
+	private String noticeCode; //공지글코드 (시퀀스 NOTICE_NO_SEQ)
+	@NotBlank
+	private String noticeTitle; //제목
+	@NotBlank
+	private String noticeContent; //내용
+
+	@DateTimeFormat(iso = ISO.DATE_TIME)
+	private LocalDateTime noticeRegidate; //등록일시 sysdate
+	@NotBlank
+	private int noticeReadcount; //조회수 (기본값 0)
+	private int atchFilenum; //첨부파일번호 ATCH_FILE
+	@NotBlank
+	private String adminEmpNo; //사번
+	
+	private EmployeeVO employee;
+}

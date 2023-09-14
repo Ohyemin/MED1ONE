@@ -1,0 +1,77 @@
+package kr.or.ddit.medical.clinc.service;
+
+import java.util.List;
+
+import kr.or.ddit.File.vo.CtfDocVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.InspectionVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+import kr.or.ddit.medical.vo.PatientVO;
+
+public interface ClinicService {
+	
+	public List<MedicineVO> retrievePagingList(PaginationInfo<MedicineVO> paging);
+	
+	/**
+	 *  약품 리스트 검색
+	 * @param mediName
+	 * @return List<MedicineVO>
+	 */
+	public List<MedicineVO> retrieveMedicineList(String mediName);
+	
+	/**
+	 *  상병 리스트 검색
+	 * @param disName
+	 * @return List<DiseaseVO>
+	 */
+	public List<DiseaseVO> retrieveDiseaseList(String disName);
+	
+	/**
+	 * 약품 검색수
+	 * @param mediName
+	 * @return
+	 */
+	public int SearchCnt(String mediName);
+	
+	/**
+	 * 즐겨찾는 약품 리스트
+	 * @return List<MedicineVO>
+	 */
+	public List<MedicineVO> popluarMedicineList();
+	
+	
+	/**
+	 * 소견서 조회
+	 * @param recCode
+	 * @return
+	 */
+	public PatientVO retrieveCTF(String recCode);
+	
+	
+	/**
+	 * 소견서 작성
+	 * @param ctfdoc
+	 * @return
+	 */
+	public boolean createCtfdoc(CtfDocVO ctfdoc);
+	
+	
+	/**
+	 * 검사 오더 용 검사 리스트
+	 */
+	public List<InspectionVO> retrieveInspectList();
+	
+	/**
+	 * 일반 검사 리스트
+	 */
+	public List<InspectionVO> retrieveGenInsList();
+	
+	
+	/**
+	 * 장비 검사 리스트
+	 */
+	public List<InspectionVO> retrieveEuqInsList();
+	
+	
+}

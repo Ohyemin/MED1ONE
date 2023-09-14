@@ -1,0 +1,17 @@
+package kr.or.ddit.Free.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.Free.service.CommentService;
+import lombok.RequiredArgsConstructor;
+
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/free/")
+public class CommentRetrieveConroller {
+
+	private CommentService service;
+	
+	
+}

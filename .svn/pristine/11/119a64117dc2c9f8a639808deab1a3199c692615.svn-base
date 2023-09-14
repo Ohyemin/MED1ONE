@@ -1,0 +1,32 @@
+package kr.or.ddit.employee.admin.service;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.employee.admin.dao.AdminDao;
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+@Service
+public class AdminServiceImpl implements AdminService {
+	
+	@Inject
+	private AdminDao dao;
+	
+	@Override
+	public List<AuthorizationReqVO> retrieveAuthList(PaginationInfo paging) {
+		long totalRecord = dao.selectTotalRecord(paging);
+		paging.setTotalRecord(totalRecord);
+		return dao.authReqList(paging);
+	}
+
+	@Override
+	public boolean modifyAuthReq(AuthorizationReqVO authReq) {
+		int cnt = dao.authUpdate(authReq);
+		return cnt > 1;
+	}
+
+}

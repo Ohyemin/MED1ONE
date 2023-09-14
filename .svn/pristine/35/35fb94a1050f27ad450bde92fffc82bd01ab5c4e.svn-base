@@ -1,0 +1,7 @@
+package kr.or.ddit.employee.service;
+
+import kr.or.ddit.login.service.EmployeeService;
+
+public class EmployeeServiceImpl implements EmployeeService {
+
+}

@@ -1,0 +1,43 @@
+package kr.or.ddit.employee.auth.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.validation.Errors;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.employee.admin.service.AdminService;
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.validate.groups.InsertGroup;
+import lombok.RequiredArgsConstructor;
+
+@RequestMapping("/auth")
+@RequiredArgsConstructor
+@Controller
+public class AuthorizationReqController {
+
+	private final AdminService service;
+	
+	@GetMapping("/authSignup.do")
+	public String getAuthSignUp() {
+		return "login/auth/auth-signup";
+	}
+	
+	@PostMapping("/authSignup.do")
+	public String postAuthSigup(
+		@Validated(InsertGroup.class) @ModelAttribute("auth") AuthorizationReqVO auth
+		, Errors errors
+	) {
+//		log.info(getAuthSignUp());
+		boolean result = service.createAuth(auth);
+		if(result) {
+			return "redirect:/success"; //가입성공
+		}else {
+			
+			return "login/auth/auth-signup";
+		}
+	}
+}
+

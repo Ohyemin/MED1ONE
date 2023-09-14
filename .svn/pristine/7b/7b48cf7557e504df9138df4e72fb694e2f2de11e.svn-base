@@ -1,0 +1,5 @@
+package kr.or.ddit.medical.patient.controller;
+
+public class PatientAssignController {
+
+}

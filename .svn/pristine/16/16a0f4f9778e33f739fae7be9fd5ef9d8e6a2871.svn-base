@@ -1,0 +1,37 @@
+package kr.or.ddit.medical.nurse.controller;
+
+import java.util.List;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import kr.or.ddit.medical.nurse.service.NurseService;
+import kr.or.ddit.medical.nurse.vo.DoctorSchdulVO;
+import kr.or.ddit.medical.nurse.vo.NurseSchdulVO;
+import lombok.RequiredArgsConstructor;
+
+@Controller
+@RequiredArgsConstructor
+@RequestMapping("/nurse/")
+public class ScheduleRetrieveController {
+	
+	private final NurseService service;
+
+	// 근무일정 - 의사
+	@GetMapping("docScheduleList.do")
+	public String docScheduleList(Model model) {
+		List<DoctorSchdulVO> doctorList = service.retrieveDoctorList();
+		model.addAttribute("doctorList", doctorList);
+		return "nurse/schedule";
+	}
+	
+	// 근무일정 - 간호사
+	@GetMapping("nurScheduleList.do")
+	public String nurScheduleList(Model model) {
+		List<NurseSchdulVO> nurseList = service.retrieveNurseList();
+		model.addAttribute("nurseList", nurseList);
+		return "nurse/schedule";
+	}
+}

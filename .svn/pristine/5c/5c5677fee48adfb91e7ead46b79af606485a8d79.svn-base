@@ -1,0 +1,55 @@
+package kr.or.ddit.employee.auth.service;
+
+import java.text.MessageFormat;
+
+import javax.inject.Inject;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Service;
+
+import kr.or.ddit.File.service.AtchFileService;
+import kr.or.ddit.common.controller.ServiceResult;
+import kr.or.ddit.employee.auth.dao.AuthorizationReqDao;
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.exception.PKNotFoundException;
+
+@Service
+public class AuthorizationServiceImpl implements AuthorizationService {
+
+	@Inject
+	private AuthorizationReqDao authDao;
+	
+	@Inject
+	private AtchFileService atchService;
+
+	@Value("#{appInfo.atchPath}")
+	private Resource atchPath;
+	
+	
+	@Override
+	public AuthorizationReqVO retrieveAuth(String reqCode) {
+		AuthorizationReqVO saved = authDao.selectAuth(reqCode);
+		if(saved == null)
+		throw new PKNotFoundException(MessageFormat.format("{0} 해당 사용자 없음", reqCode));
+		return saved;
+	}
+	
+	
+	@Override
+	public ServiceResult createAuth(AuthorizationReqVO auth) {
+		ServiceResult result = null;
+		
+		try {
+			retrieveAuth(auth.getReqCode());
+			result = ServiceResult.PKDUPLICATE;
+		}catch(PKNotFoundException e) {
+			
+		}
+		
+		return null;
+	}
+
+	
+	
+}

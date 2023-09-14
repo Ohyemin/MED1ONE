@@ -1,0 +1,188 @@
+package kr.or.ddit.sales.controller;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.servlet.http.HttpServletResponse;
+import javax.xml.bind.ParseConversionEvent;
+
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellType;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+
+import kr.or.ddit.employee.service.EmployeeService;
+import kr.or.ddit.employee.vo.EmployeeVO;
+import kr.or.ddit.medical.administ.service.AdministService;
+import kr.or.ddit.medical.hospital.service.HospitalService;
+import kr.or.ddit.medical.patient.service.PatientService;
+import kr.or.ddit.sales.service.SalesService;
+import kr.or.ddit.sales.vo.SalesVO;
+
+@Controller
+@RequestMapping("/sales")
+public class SalesMainController {
+
+	@Inject
+	private	SalesService salesService;
+	
+	@Inject
+	private	AdministService adService;
+	
+	@Inject
+	private	EmployeeService empService;
+	
+	@Inject
+	private	PatientService cntService;
+	
+	@Inject
+	private HospitalService hospitalService;
+	
+	@RequestMapping("salesMain.do")
+	public void salesMain( 
+			
+			Model model
+	) {
+		
+		List<EmployeeVO> JobEmpList = empService.retrieveJobEmp(); //직군별 직원수
+		List<EmployeeVO> deptEmpList = empService.retrieveDeptEmp(); //부서별 직원수
+		List<SalesVO> salesList = salesService.retrieveSales();//전체 매출 리스트
+		
+		
+		// Calculate total of freeEmpCount
+	   
+
+		model.addAttribute("salesList",salesList);
+		model.addAttribute("deptEmpList",deptEmpList);
+		model.addAttribute("JobEmpList",JobEmpList);
+		
+		
+		 
+	}
+	
+	
+	@RequestMapping("downloadExcel.do")
+	public void downloadExcel(HttpServletResponse response) throws IOException {
+		List<SalesVO> salesList = salesService.retrieveSales();//전체 매출 리스트
+
+	    Workbook workbook = new XSSFWorkbook(); // Use XSSFWorkbook for .xlsx format
+	    Sheet sheet = workbook.createSheet("salesList");
+
+	    // Create header row
+	    Row headerRow = sheet.createRow(0);
+	    headerRow.createCell(0).setCellValue("부서코드");
+	    headerRow.createCell(1).setCellValue("부서명");
+	    headerRow.createCell(2).setCellValue("연");
+	    headerRow.createCell(3).setCellValue("월");
+	    headerRow.createCell(4).setCellValue("매출액(백만원)");
+	    headerRow.createCell(5).setCellValue("외래환자수");
+	    headerRow.createCell(6).setCellValue("입원환자수");
+
+	    // Create data rows
+	    int rowNum = 1;
+	 
+	    for (SalesVO data : salesList) {
+	        Row dataRow = sheet.createRow(rowNum++);
+	        dataRow.createCell(0).setCellValue(data.getRnum());
+	        dataRow.createCell(1).setCellValue(data.getSalesDeptCode());
+	        dataRow.createCell(2).setCellValue(data.getDeptNm());
+	        dataRow.createCell(3).setCellValue(data.getSalesYear());
+	        dataRow.createCell(4).setCellValue(data.getSalesMonth());
+	        dataRow.createCell(5).setCellValue(data.getDeptAmount());
+	        dataRow.createCell(6).setCellValue(data.getClinicCustomer());
+	        dataRow.createCell(7).setCellValue(data.getHospitalCustomer());
+
+	    }
+
+	   
+	    // Set content type and headers for Excel download
+	    response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+	    response.setHeader("Content-Disposition", "attachment; filename=salesList.xlsx");
+
+	    // Write Excel data to response
+	    workbook.write(response.getOutputStream());
+	    workbook.close();
+	}
+	
+	
+	@RequestMapping(value = "uploadExcel.do", method = RequestMethod.POST)
+	public String uploadExcel(@RequestParam("file") MultipartFile file, Model model) {
+	    List<SalesVO> salesList = new ArrayList<>();
+
+	    try {
+	        Workbook workbook = new XSSFWorkbook(file.getInputStream());
+	        Sheet sheet = workbook.getSheetAt(0); // Assuming the data is in the first sheet
+
+	        // Start from the second row (index 1)
+	        for (int rowIndex = 1; rowIndex <= sheet.getLastRowNum(); rowIndex++) {
+	            Row row = sheet.getRow(rowIndex);
+	            if (row == null) {
+	                // Handle null row if needed
+	                continue;
+	            }
+
+	            SalesVO data = new SalesVO();
+
+	            Cell salesRnumCell = row.getCell(0);
+	            if (salesRnumCell != null) {
+	                data.setRnum((long) salesRnumCell.getNumericCellValue());
+	            }
+
+	            Cell salesDeptCodeCell = row.getCell(1);
+	            if (salesDeptCodeCell != null) {
+	                data.setSalesDeptCode(salesDeptCodeCell.getStringCellValue());
+	            }
+
+	            Cell deptNmCell = row.getCell(2);
+	            if (deptNmCell != null) {
+	                data.setDeptNm(deptNmCell.getStringCellValue());
+	            }
+
+	            Cell salesYearCell = row.getCell(3);
+	            if (salesYearCell != null) {
+	                data.setSalesYear(salesYearCell.getStringCellValue());
+	            }
+
+	            Cell salesMonthCell = row.getCell(4);
+	            if (salesMonthCell != null) {
+	                data.setSalesMonth(salesMonthCell.getStringCellValue());
+	            }
+
+	            Cell deptAmountCell = row.getCell(5);
+	            if (deptAmountCell != null) {
+	            	 data.setDeptAmount((long) deptAmountCell.getNumericCellValue());
+	            }
+
+	            Cell clinicCustomerCell = row.getCell(6);
+	            if (clinicCustomerCell != null) {
+	                data.setClinicCustomer((int) clinicCustomerCell.getNumericCellValue());
+	            }
+
+	            Cell hospitalCustomerCell = row.getCell(7);
+	            if (hospitalCustomerCell != null) {
+	                data.setHospitalCustomer((int) hospitalCustomerCell.getNumericCellValue());
+	            }
+
+	            // ... Set additional data properties if needed
+
+	            salesList.add(data);
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	        // Handle the exception appropriately
+	    }
+
+	    model.addAttribute("salesList", salesList);
+	    return "sales/salesUpload"; // Assuming you have a JSP view named "salesUpload.jsp"
+	}
+}

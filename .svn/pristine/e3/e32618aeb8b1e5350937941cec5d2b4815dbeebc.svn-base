@@ -1,0 +1,21 @@
+package kr.or.ddit.Free.service;
+
+import java.util.List;
+
+import kr.or.ddit.Free.vo.FreeBoardVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+public interface FreeService {
+
+	public List<FreeBoardVO> retrieveFreeBoardList(PaginationInfo<FreeBoardVO> paging);
+
+	public FreeBoardVO retrieveFreeBoard(int boardNo);
+
+	public boolean createBoard(FreeBoardVO freeBoard);
+
+	public boolean modifyBoard(FreeBoardVO freeBoard);
+
+
+	public boolean removeBoard(int boardNo);
+
+}

@@ -1,0 +1,63 @@
+package kr.or.ddit.medical.clinc.controller;
+
+import java.util.List;
+
+import javax.inject.Inject;
+
+import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import kr.or.ddit.medical.clinc.service.ClinicService;
+import kr.or.ddit.medical.clinc.vo.DiseaseVO;
+import kr.or.ddit.medical.clinc.vo.MedicineVO;
+import lombok.RequiredArgsConstructor;
+
+/**
+ * 의사 진료실 - 상병검색/ 약품검색 / 약품 즐찾리스트
+ * @author PC-10
+ *
+ */
+@Controller
+@RequestMapping("/clinic")
+@RequiredArgsConstructor
+public class DoctorClinicRetrieveController {
+
+	@Inject
+	private final ClinicService service;
+
+	// jsp 접근 GET메서드
+	@GetMapping("clinicRetrieve.do")
+	public String clinicRetrieve() {
+		return "clinic/clinic";
+	}
+
+	// 진료 - 상병 검색
+	@GetMapping(value = "diseaseSearch.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public List<DiseaseVO> diseaseSearch(@RequestParam("what") String disName) {
+		List<DiseaseVO> disList = service.retrieveDiseaseList(disName);
+		return disList;
+	}
+
+	// 진료 - 약품 검색
+	@GetMapping(value = "medicineSearch.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public List<MedicineVO> medicineSearch(@RequestParam("what") String mediName) {
+		List<MedicineVO> mediList = service.retrieveMedicineList(mediName);
+		service.SearchCnt(mediName);
+		return mediList;
+	}
+
+	
+	// 진료 - 약품 즐찾리스트
+	@GetMapping(value = "popularMedicineList.do", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@ResponseBody
+	public List<MedicineVO> popularMedicineList() {
+		List<MedicineVO> popList = service.popluarMedicineList();
+		return popList;
+	}
+}

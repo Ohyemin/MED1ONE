@@ -1,0 +1,17 @@
+package kr.or.ddit.employee.admin.dao;
+
+import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
+
+import kr.or.ddit.employee.vo.AuthorizationReqVO;
+import kr.or.ddit.employee.vo.PaginationInfo;
+
+@Mapper
+public interface AdminDao {
+	
+	public long selectTotalRecord(PaginationInfo paging);
+	public List<AuthorizationReqVO> authReqList(PaginationInfo paging);
+	
+	public int authUpdate(AuthorizationReqVO authReq); // 승인신청 상태 변경
+}

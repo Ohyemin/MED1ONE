@@ -1,0 +1,13 @@
+package kr.or.ddit.Free.service;
+
+import java.util.List;
+
+import kr.or.ddit.Free.vo.FreeBoardVO;
+
+public interface FreeService {
+	
+	public List<FreeBoardVO> retrieveBoardList();
+	
+	public FreeBoardVO retirevefreeBoard(int boNo);
+
+}
